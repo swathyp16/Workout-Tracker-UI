@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAddWorkout } from './create-workout';
+import { IViewAllWorkout } from './viewall-workout';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptions } from '@angular/http';
@@ -7,21 +7,17 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class AddWorkoutService{
+export class ViewAllWorkoutService{
 
   constructor(private _http: Http){
   
   }
   
 
-  addWorkout(): Observable<IAddWorkout[]>{
-    var json = JSON.stringify({workoutId: 4,workoutTitle:'skipping',workoutNote:'skipping daily',caloriesBurnt: 200,categoryId: 10});
-    var params = 'json=' + json;
-    var headers = new Headers();
-    headers.append('Content-Type','application/x-www-form-urlencoded');//'application/x-www-form-urlencoded');
+  viewAllWorkout(): Observable<IViewAllWorkout[]>{
     console.log("<--------- Service call inititated---------------->");
-    //return this._http.get("http://localhost:8080/createWorkout/all").map((response: Response) => <IAddWorkout[]> response.json())
-   return this._http.post("http://localhost:8090/createWorkout/all",params,{headers:headers}).map((response: Response) => <IAddWorkout[]> response.json())
+    return this._http.get("http://localhost:8080/createWorkout/all").map((response: Response) => <IViewAllWorkout[]> response.json())
+   //return this._http.post("http://localhost:8080/createWorkout/all").map((response: Response) => <IAddWorkout[]> response.json())
   }
   /*addWorkout(workout:IAddWorkout): Observable<IAddWorkout>{
     console.log("<--------- Service call inititated---------------->");    
