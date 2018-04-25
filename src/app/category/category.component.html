@@ -1,5 +1,36 @@
-<div class="div-position">
+
+<div>
+    <div class="div-position">
     <h1>
-        category works!
+        Add Category
       </h1>
+      </div>
+      <form #addCategoryForm="ngForm" class="form-horizontal" (ngSubmit)="addWorkoutCategory(addCategoryForm)">
+      <div class="form-group category-position">
+        <div class="col-sm-4">
+        <input class="form-control" name="categoryName" [(ngModel)]="categoryName" type="text">
+        </div>
+        <span>
+            <button type="submit" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </span>
+        </div>
+      <!-- </div> -->
+      <table class="workoutCategory-tr">
+            <tr *ngFor = "let category of viewAllCategory; let i = index">
+              <!-- <span>{{workoutData.workoutTitle}}</span> -->
+              <td>
+                <div class="viewAllWorkout-font">{{category.categoryName}}
+                  <span>
+                    <input class="btn btn-info" type="button" value="Edit" (click)="editCategory($event)">
+                  </span>
+                  <span>
+                    <input class="btn btn-info" type="button" value="Delete" (click)="deleteCategory(category,i)">
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </table>
+    </form>
 </div>

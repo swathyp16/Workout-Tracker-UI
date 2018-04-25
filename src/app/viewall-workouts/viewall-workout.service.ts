@@ -3,40 +3,47 @@ import { IViewAllWorkout } from './viewall-workout';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ViewAllWorkoutService{
 
-  constructor(private _http: Http){
+  constructor(private _http: HttpClient){
   
   }
   
 
   viewAllWorkout(): Observable<IViewAllWorkout[]>{
     console.log("<--------- Service call inititated---------------->");
-    return this._http.get("http://localhost:8080/createWorkout/all").map((response: Response) => <IViewAllWorkout[]> response.json())
-   //return this._http.post("http://localhost:8080/createWorkout/all").map((response: Response) => <IAddWorkout[]> response.json())
+    return this._http.get("http://localhost:8090/viewWorkout/all").map(this.extractData).catch(this.handleErrorObservable);
+    //map((response: Response) => <IViewAllWorkout[]> response.json())
   }
-  /*addWorkout(workout:IAddWorkout): Observable<IAddWorkout>{
-    console.log("<--------- Service call inititated---------------->");    
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    let workoutParams = [
-      { workoutId: 12, workoutTitle: 'Swimming',workoutNote : 'Swiming in pool for 30mins',caloriesBurnt: 200,categoryId: 5 }
-    ];
-   // return this._http.get("http://localhost:8080/createWorkout/all",options).map((response: Response) => <IAddWorkout[]> response.json())
-   return this._http.post("http://localhost:8080/createWorkout/all",workoutParams,options).map((response: Response) => <IAddWorkout> response.json());
-  }*/
+  
 
   extractData(res: Response) {
-    let body = res.json();
-    console.log("body: " + body);
+    debugger
+    let body = res;//.json();
+    console.log("inside extractData --> body: " + body);
     return body || {};
   }
   handleErrorObservable (error: Response | any) {
+    console.log("inside handleErrorObservable");
     console.error(error.message || error);
     return Observable.throw(error.message || error);
   } 
+
+  deleteWorkout(workoutData):Observable<string>{
+    var json = JSON.stringify(workoutData);
+    var params = json;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    console.log("<--------- Service call inititated---------------->"+ params);
+    return this._http.post("http://localhost:8090/deleteWorkout",params,httpOptions).map((response: Response) =>  response.json())
+  }
 }

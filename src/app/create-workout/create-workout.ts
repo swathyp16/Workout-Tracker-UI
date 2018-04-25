@@ -1,7 +1,7 @@
 export class IAddWorkout{
-    workoutId: number;
+    workoutId: string;
     workoutTitle: string;
     workoutNote: string;
-    caloriesBurnt: number;
-    categoryId: number;
+    caloriesBurnt: string;
+    categoryId: string;
 }

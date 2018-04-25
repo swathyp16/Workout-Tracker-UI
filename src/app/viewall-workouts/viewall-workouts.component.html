@@ -1,5 +1,26 @@
 <div class="div-position">
-  <h1>
-  viewall-workouts works!
-  </h1>
+  <form #viewAllWorkouts="ngForm">
+  <table>
+    <tr class="workoutEntry-tr" *ngFor = "let workoutData of viewAllWorkout; let i = index">
+      <!-- <span>{{workoutData.workoutTitle}}</span> -->
+      <td>
+        <div class="viewAllWorkout-font">{{workoutData.workoutTitle}}</div>
+        <div>
+          <span>
+            <input class="btn btn-info" type="button" value="Edit" (click)="editWorkout($event)">
+          </span>
+          <span>
+            <input class="btn btn-info" type="button" value="Delete" (click)="deleteWorkout(workoutData,i)">
+          </span>
+          <span>
+            <input class="btn btn-success" type="button" value="Start">
+          </span>
+          <span>
+            <input class="btn btn-danger" type="button" value="End">
+          </span>
+        </div>
+      </td>
+    </tr>
+  </table>
+  </form>
 </div>

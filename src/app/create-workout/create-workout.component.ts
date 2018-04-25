@@ -24,14 +24,15 @@ export class CreateWorkoutComponent implements OnInit {
    
   }
   
-  onSubmit() {
-    this._addWorkoutService.addWorkout().subscribe(addedData => this.addWorkout = addedData);
+  //onSubmit() {
+   // this._addWorkoutService.addWorkout().subscribe(addedData => this.addWorkout = addedData);
     
     //this._addWorkoutService.addWorkout().subscribe(addedData => this.addWorkout = addedData);
-  }
+  //}
 
   onAddWorkoutFormSubmit(addForm : NgForm): void{
     console.log("addWorkoutForm : " + JSON.stringify(addForm.value));
+    this._addWorkoutService.addWorkout(addForm).subscribe(addedData => this.addWorkout = addedData);
   }
 
 }

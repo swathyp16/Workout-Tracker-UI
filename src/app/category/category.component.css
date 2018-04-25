@@ -2,3 +2,15 @@
     position: relative;
     top: 60px;   
 }
+
+.category-position{
+    position: relative;
+    top: 80px;
+    left: 10px;
+}
+
+.workoutCategory-tr{
+    position: relative;
+    top: 92px;
+    left: 12px;
+}

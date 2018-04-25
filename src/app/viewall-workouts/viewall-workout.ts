@@ -1,7 +1,8 @@
-export class IViewAllWorkout{
-    workoutId: number;
-    workoutTitle: string;
-    workoutNote: string;
-    caloriesBurnt: number;
-    categoryId: number;
+export interface IViewAllWorkout{
+         workoutId: string;
+         workoutTitle: string;
+         workoutNote: string;
+         caloriesBurnt: string;
+         categoryId: string;
+    
 }
