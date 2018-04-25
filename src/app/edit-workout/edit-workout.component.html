@@ -1,0 +1,37 @@
+<div class="div-position">
+    <!-- <h1>
+        Edit Workout
+    </h1> -->
+    <form #editWorkouts="ngForm" class="editForm" (ngSubmit)="onEditWorkoutFormSubmit(editWorkouts)">
+        <div class="form-group">
+            <div class="col-sm-10">
+              <label class="col-sm-2 form-control-label">Title: </label>
+              <div class="col-sm-4">
+                <input class="form-control" name="workoutTitle" value={{editDetails.workoutTitle}} [(ngModel)]="workoutTitle" type="text">
+              </div>
+            </div>
+         </div>
+         <div class="form-group">
+        <div class="col-sm-10">
+            <label class="col-sm-2 form-control-label">Note: </label>
+            <div class="col-sm-4">
+                <input class="form-control" name="workoutNote" value={{editDetails.workoutNote}} [(ngModel)]="workoutNote" type="text">
+            </div>
+        </div>
+        </div>
+        <div class="form-group">
+        <div class="col-sm-10">
+            <label class="col-sm-2 form-control-label">Category </label>
+            <div class="col-sm-4">
+            <select (change)="onSelect($event)" name="categoryId" [(ngModel)]="categoryList.categoryId">
+                <option *ngFor="let category of viewCategoryForEdit"  [ngValue]="category.categoryId">
+                {{category.categoryName}}
+                </option>
+            </select>
+            </div>
+        </div>
+        </div>
+      <input type="submit" class="btn btn-info" value="Update">
+      <input type="button" class="btn btn-info" value="Cancel">
+    </form>
+</div>

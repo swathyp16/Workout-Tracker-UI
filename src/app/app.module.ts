@@ -13,14 +13,16 @@ import { TrackerComponent } from './tracker/tracker.component';
 import { ViewallWorkoutsComponent } from './viewall-workouts/viewall-workouts.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
+import { EditWorkoutComponent } from './edit-workout/edit-workout.component';
 
 const appRoutes: Routes = [
   //{path : 'home', component: AppComponent},
   {path : '', component: HomeComponent},//redirectTo: '/app',pathMatch: 'full'},
-  {path : 'viewAll', component: ViewallWorkoutsComponent},
+  {path : 'viewAll',  component: ViewallWorkoutsComponent},
   {path : 'createWorkout', component: CreateWorkoutComponent},
   {path : 'category', component: CategoryComponent},
   {path : 'tracker', component: TrackerComponent},
+  {path : 'editWorkout/:id', component: EditWorkoutComponent},
   {path : '**', component: PagenotfoundComponent}
 ];
 
@@ -32,15 +34,18 @@ const appRoutes: Routes = [
     TrackerComponent,
     ViewallWorkoutsComponent,
     PagenotfoundComponent,
-    HomeComponent
+    HomeComponent,
+    EditWorkoutComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    RouterModule.forChild(appRoutes)
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })
