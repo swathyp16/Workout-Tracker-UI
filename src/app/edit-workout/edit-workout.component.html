@@ -2,12 +2,20 @@
     <!-- <h1>
         Edit Workout
     </h1> -->
+<<<<<<< HEAD
     <form [formGroup]="editWorkoutsForm" class="editForm" (ngSubmit)="onEditWorkoutFormSubmit()">
+=======
+    <form #editWorkouts="ngForm" class="editForm" (ngSubmit)="onEditWorkoutFormSubmit(editWorkouts)">
+>>>>>>> d5236eb7a9283d8022c973773b91c11dc99a2661
         <div class="form-group">
             <div class="col-sm-10">
               <label class="col-sm-2 form-control-label">Title: </label>
               <div class="col-sm-4">
+<<<<<<< HEAD
                 <input *ngIf="editDetails[0] != undefined" class="form-control" formControlName="workoutTitle" type="text">
+=======
+                <input class="form-control" name="workoutTitle" value={{editDetails.workoutTitle}} [(ngModel)]="workoutTitle" type="text">
+>>>>>>> d5236eb7a9283d8022c973773b91c11dc99a2661
               </div>
             </div>
          </div>
@@ -15,7 +23,11 @@
         <div class="col-sm-10">
             <label class="col-sm-2 form-control-label">Note: </label>
             <div class="col-sm-4">
+<<<<<<< HEAD
                 <input *ngIf="editDetails[0] != undefined" class="form-control" formControlName="workoutNote" type="text">
+=======
+                <input class="form-control" name="workoutNote" value={{editDetails.workoutNote}} [(ngModel)]="workoutNote" type="text">
+>>>>>>> d5236eb7a9283d8022c973773b91c11dc99a2661
             </div>
         </div>
         </div>
@@ -23,7 +35,11 @@
         <div class="col-sm-10">
             <label class="col-sm-2 form-control-label">Category </label>
             <div class="col-sm-4">
+<<<<<<< HEAD
             <select (change)="onSelect($event)" formControlName="categoryId" [(ngModel)]="categoryList.categoryId">
+=======
+            <select (change)="onSelect($event)" name="categoryId" [(ngModel)]="categoryList.categoryId">
+>>>>>>> d5236eb7a9283d8022c973773b91c11dc99a2661
                 <option *ngFor="let category of viewCategoryForEdit"  [ngValue]="category.categoryId">
                 {{category.categoryName}}
                 </option>
@@ -34,5 +50,8 @@
       <input type="submit" class="btn btn-info" value="Update">
       <input type="button" class="btn btn-info" value="Cancel">
     </form>
+<<<<<<< HEAD
     {{editWorkoutsForm.value | json}}
+=======
+>>>>>>> d5236eb7a9283d8022c973773b91c11dc99a2661
 </div>

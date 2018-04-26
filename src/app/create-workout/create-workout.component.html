@@ -33,7 +33,11 @@
       <label class="col-sm-2 form-control-label">Category </label>
       <div class="col-sm-4">
         <!-- <input type="text" class="form-control" name="workoutCategory" [(ngModel)]="workoutCategory"> -->
+<<<<<<< HEAD
         <select (change)="onSelect($event)" formControlName="categoryId" [(ngModel)]="selectedCategory.categoryId">
+=======
+        <select (change)="onSelect($event)" name="categoryId" [(ngModel)]="selectedCategory.categoryId">
+>>>>>>> d5236eb7a9283d8022c973773b91c11dc99a2661
           <option *ngFor="let category of viewCategoryList"  [ngValue]="category.categoryId">
             {{category.categoryName}}
           </option>
