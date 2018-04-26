@@ -18,13 +18,12 @@ export class ViewAllWorkoutService{
 
   viewAllWorkout(): Observable<IViewAllWorkout[]>{
     console.log("<--------- Service call inititated---------------->");
-    return this._http.get("http://localhost:8090/viewWorkout/all").map(this.extractData).catch(this.handleErrorObservable);
+    return this._http.get("http://localhost:8090/viewAllWorkout").map(this.extractData).catch(this.handleErrorObservable);
     //map((response: Response) => <IViewAllWorkout[]> response.json())
   }
   
 
   extractData(res: Response) {
-    debugger
     let body = res;//.json();
     console.log("inside extractData --> body: " + body);
     return body || {};

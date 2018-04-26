@@ -1,4 +1,4 @@
-<div class="div-position">
+<div *ngIf="!isEditWorkout" class="div-position">
   <form #viewAllWorkouts="ngForm">
   <table>
     <tr class="workoutEntry-tr" *ngFor = "let workoutData of viewAllWorkout; let i = index">
@@ -7,7 +7,7 @@
         <div class="viewAllWorkout-font">{{workoutData.workoutTitle}}</div>
         <div>
           <span>
-            <input class="btn btn-info" type="button" value="Edit" (click)="editWorkout($event)">
+            <input class="btn btn-info" type="button" value="Edit" [routerLink]="['/editWorkout', workoutData.workoutId]">
           </span>
           <span>
             <input class="btn btn-info" type="button" value="Delete" (click)="deleteWorkout(workoutData,i)">

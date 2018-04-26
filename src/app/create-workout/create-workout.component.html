@@ -2,13 +2,13 @@
   <h1>
   Add Workout
 </h1>
-<form #addWorkoutForm="ngForm" class="form-horizontal" (ngSubmit)="onAddWorkoutFormSubmit(addWorkoutForm)"> 
+<form [formGroup]="addWorkoutForm" class="form-horizontal" (ngSubmit)="onAddWorkoutFormSubmit(addWorkoutForm)"> 
 <div id="add-workout-wrapper">
   <div class="form-group">
     <div class="col-sm-10">
       <label class="col-sm-2 form-control-label">Title: </label>
       <div class="col-sm-4">
-        <input class="form-control" name="workoutTitle" [(ngModel)]="workoutTitle" type="text">
+        <input class="form-control" formControlName="workoutTitle" [(ngModel)]="workoutTitle" type="text">
       </div>
     </div>
  </div>
@@ -16,7 +16,7 @@
     <div class="col-sm-10">
       <label class="col-sm-2 form-control-label">Note: </label>
       <div class="col-sm-4">
-        <textarea class="form-control" name="workoutNote" [(ngModel)]="workoutNote"></textarea>
+        <textarea class="form-control" formControlName="workoutNote" [(ngModel)]="workoutNote"></textarea>
       </div>
     </div>
  </div>
@@ -24,7 +24,7 @@
     <div class="col-sm-10">
       <label class="col-sm-2 form-control-label">Calories Burnt Per Min </label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" name="caloriesBurnt" [(ngModel)]="caloriesBurnt">
+        <input type="text" class="form-control" formControlName="caloriesBurnt" [(ngModel)]="caloriesBurnt">
       </div>
     </div>
  </div>
@@ -32,7 +32,12 @@
     <div class="col-sm-10">
       <label class="col-sm-2 form-control-label">Category </label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" name="workoutCategory" [(ngModel)]="workoutCategory">
+        <!-- <input type="text" class="form-control" name="workoutCategory" [(ngModel)]="workoutCategory"> -->
+        <select (change)="onSelect($event)" formControlName="categoryId" [(ngModel)]="selectedCategory.categoryId">
+          <option *ngFor="let category of viewCategoryList"  [ngValue]="category.categoryId">
+            {{category.categoryName}}
+          </option>
+        </select>
       </div>
     </div>
  </div>
@@ -44,4 +49,5 @@
 </div>
 </form>
 {{addWorkoutForm.value | json}}
+<!-- Selected Category ID: {{category.categoryId}} & Name: {{category.categoryTitle}} -->
 </div>

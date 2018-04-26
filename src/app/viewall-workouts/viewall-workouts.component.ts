@@ -10,10 +10,15 @@ import { IViewAllWorkout } from './viewall-workout';
 })
 export class ViewallWorkoutsComponent implements OnInit {
  viewAllWorkout: IViewAllWorkout[];
+ //private isEditWorkout: boolean = false;
  deleteWorkoutStatus: string;
-  constructor(private _viewallWorkoutService: ViewAllWorkoutService) { }
+  constructor(private _viewallWorkoutService: ViewAllWorkoutService) {
+   // this.isEditWorkout = false;
+   }
+
 
   ngOnInit() {
+    //this.isEditWorkout = false;
     this._viewallWorkoutService.viewAllWorkout().subscribe(viewAllWorkout => this.viewAllWorkout = viewAllWorkout);
     console.log("View All Response : "+ this.viewAllWorkout);
   }
@@ -24,5 +29,10 @@ export class ViewallWorkoutsComponent implements OnInit {
     console.log("delete category status: "+ this.deleteWorkoutStatus);
     this.viewAllWorkout.splice(index,1);
   }
+
+  
+  // ResetEditWorkoutFlag() {
+  //   this.isEditWorkout = false;
+  // }
 
 }

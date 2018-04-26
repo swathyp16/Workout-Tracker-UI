@@ -24,6 +24,7 @@ export class CategoryComponent implements OnInit {
     console.log("addCategoryForm : " + JSON.stringify(addCategoryForm.value));
     this._workoutCategoryService.addCategory(addCategoryForm).subscribe(addedCategory => this.addCategory = addedCategory);
     console.log("addCategory Response : " + this.addCategory);
+    this.viewAllCategory.splice( 1, 0, addCategoryForm.value);
   }
 
   deleteCategory(category,index){
