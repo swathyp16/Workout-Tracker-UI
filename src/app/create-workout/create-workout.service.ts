@@ -18,8 +18,19 @@ export class AddWorkoutService{
   
   }
   
+  editWorkout(editArgs): Observable<IAddWorkout[]>{
+    var json = JSON.stringify(editArgs[0]);
+    var params = json;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    console.log("<--------- Service call inititated---------------->"+ params);
+    return this._http.post("http://localhost:8090/createWorkout/all",params,httpOptions).map((response: Response) => <IAddWorkout[]> response.json())
+  }
 
-  addWorkout(addWorkoutForm: FormGroup): Observable<IAddWorkout[]>{
+  addWorkout(addWorkoutForm: NgForm): Observable<IAddWorkout[]>{
     var json = JSON.stringify(addWorkoutForm);
     var params = json;
     const httpOptions = {
@@ -34,13 +45,9 @@ export class AddWorkoutService{
   viewWorkoutCategory():Observable<IViewWorkoutCategory[]>{
     console.log("inside viewAllCategory");
     console.log("<--------- Service call inititated---------------->");
-<<<<<<< HEAD
     return this._http.get("http://localhost:8090/viewAllCategory")
     .map(this.extractData)
     .catch(this.handleErrorObservable);
-=======
-    return this._http.get("http://localhost:8090/viewAllCategory").map(this.extractData).catch(this.handleErrorObservable);
->>>>>>> d5236eb7a9283d8022c973773b91c11dc99a2661
   }
   
   extractData(res: Response) {
