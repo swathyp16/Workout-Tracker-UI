@@ -15,6 +15,8 @@ import { ViewallWorkoutsComponent } from './viewall-workouts/viewall-workouts.co
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
 import { EditWorkoutComponent } from './edit-workout/edit-workout.component';
+import { StartEndWorkoutComponent } from './start-end-workout/start-end-workout.component';
+import { SharedServiceService } from './shared-service.service';
 
 const appRoutes: Routes = [
   //{path : 'home', component: AppComponent},
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
   {path : 'category', component: CategoryComponent},
   {path : 'tracker', component: TrackerComponent},
   {path : 'editWorkout/:id', component: EditWorkoutComponent},
+  {path : 'startWorkout/:id', component: StartEndWorkoutComponent},
   {path : '**', component: PagenotfoundComponent}
 ];
 
@@ -36,7 +39,8 @@ const appRoutes: Routes = [
     ViewallWorkoutsComponent,
     PagenotfoundComponent,
     HomeComponent,
-    EditWorkoutComponent
+    EditWorkoutComponent,
+    StartEndWorkoutComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,7 @@ const appRoutes: Routes = [
     RouterModule.forChild(appRoutes)
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [SharedServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,6 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ViewAllWorkoutService{
-
   constructor(private _http: HttpClient){
   
   }

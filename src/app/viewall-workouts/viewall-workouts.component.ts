@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewAllWorkoutService } from './viewall-workout.service';
 import { IViewAllWorkout } from './viewall-workout';
+import { SharedServiceService } from './../shared-service.service';
 
 @Component({
   selector: 'app-viewall-workouts',
@@ -10,29 +11,30 @@ import { IViewAllWorkout } from './viewall-workout';
 })
 export class ViewallWorkoutsComponent implements OnInit {
  viewAllWorkout: IViewAllWorkout[];
- //private isEditWorkout: boolean = false;
  deleteWorkoutStatus: string;
-  constructor(private _viewallWorkoutService: ViewAllWorkoutService) {
-   // this.isEditWorkout = false;
-   }
+  constructor(
+    private _viewallWorkoutService: ViewAllWorkoutService,  
+    private _sharedService: SharedServiceService
+  ) {}
 
 
   ngOnInit() {
-    //this.isEditWorkout = false;
     this._viewallWorkoutService.viewAllWorkout().subscribe(viewAllWorkout => this.viewAllWorkout = viewAllWorkout);
-    console.log("View All Response : "+ this.viewAllWorkout);
   }
 
   deleteWorkout(workoutData,index){
-    console.log("delete workout details : " + JSON.stringify(workoutData));
     this._viewallWorkoutService.deleteWorkout(workoutData).subscribe(deleteWorkoutStatus => this.deleteWorkoutStatus = deleteWorkoutStatus);
-    console.log("delete category status: "+ this.deleteWorkoutStatus);
     this.viewAllWorkout.splice(index,1);
   }
 
-  
-  // ResetEditWorkoutFlag() {
-  //   this.isEditWorkout = false;
-  // }
+  onClick(event){
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.value;
+   if(idAttr == "Start"){
+      this._sharedService.setStartBtnFlag(true);
+    } else if(idAttr == "End"){
+      this._sharedService.setEndBtnFlag(true); 
+    }
+  }
 
 }

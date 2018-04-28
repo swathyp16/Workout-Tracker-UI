@@ -1,0 +1,12 @@
+.div-position{
+    position: relative;
+    top: 65px;
+    display: block;
+}
+
+.buttons{
+    position: absolute;
+    top: 205px;
+    margin-left: 137px;
+    padding: 10px;
+}

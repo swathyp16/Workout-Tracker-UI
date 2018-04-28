@@ -13,10 +13,10 @@
             <input class="btn btn-info" type="button" value="Delete" (click)="deleteWorkout(workoutData,i)">
           </span>
           <span>
-            <input class="btn btn-success" type="button" value="Start">
+            <input class="btn btn-success" type="button" value="Start" (click)="onClick($event)" [routerLink]="['/startWorkout', workoutData.workoutId]">
           </span>
           <span>
-            <input class="btn btn-danger" type="button" value="End">
+            <input class="btn btn-danger" type="button"  value="End" (click)="onClick($event)" [routerLink]="['/startWorkout', workoutData.workoutId]">
           </span>
         </div>
       </td>

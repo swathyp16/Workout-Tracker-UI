@@ -34,22 +34,15 @@ export class EditWorkoutComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     this._editWorkoutService.fetchEditWorkoutDetails(id)
     .subscribe(data =>{
-    //this.selectedworkout[0] = data;
     this.editDetails = data;
       console.log("data is !!!!! : "+ this.editDetails)
     });}
 
-  ngOnInit() {    
-    // let id = this.route.snapshot.paramMap.get('id');
-    //console.log("<-----------ID ------------->" + id);
-    debugger
+  ngOnInit() { 
     this._workoutCategoryService.viewAllCategory().subscribe(viewCategoryForEdit => this.viewCategoryForEdit = viewCategoryForEdit);
-    //if(this.editDetails && this.editDetails!= undefined){
   }
 
   onSelect(args) { 
-    debugger
-    //console.log("onSelect selectedCategoryId : " + JSON.stringify(args.target.options[0]));
     this.categoryList = null;
         for (var i = 0; i < this.viewCategoryForEdit.length; i++)
         {
