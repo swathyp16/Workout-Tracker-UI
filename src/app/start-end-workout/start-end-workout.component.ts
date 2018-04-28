@@ -31,12 +31,19 @@ export class StartEndWorkoutComponent implements OnInit {
     this._editWorkoutService.fetchEditWorkoutDetails(id)
     .subscribe(data =>{
     this.fetchedDetails = data;
-      console.log("fetched data is !!!!! : "+ this.fetchedDetails);
+      console.log("fetched data is !!!!! : "+ this.fetchedDetails +"btn: "+ this.startButtonIdFlag);
        this.startParams = <IStartEndWorkout[]>this.fetchedDetails;
-       console.log("start data is !!!!! : "+ JSON.stringify(this.startParams));
-       this.startParams[0].startDate = this.formatStartDate(Date.now());
-       this.startParams[0].startTime = this.formatStartTime(Date.now());
-       console.log("new start data is !!!!! : "+ JSON.stringify(this.startParams));
+       if(this.startButtonIdFlag){
+        this.startParams[0].startDate = this.formatDate(Date.now());
+        this.startParams[0].startTime = this.formatTime(Date.now());
+        this.startParams[0].startWorkoutFlag = true;
+        console.log("new start data is !!!!! : "+ JSON.stringify(this.startParams));
+       }else{
+        this.startParams[0].endDate = this.formatDate(Date.now());
+        this.startParams[0].endTime = this.formatTime(Date.now());
+        this.startParams[0].startWorkoutFlag = false;
+        console.log("new end data is !!!!! : "+ JSON.stringify(this.startParams));
+       } 
     });
    }
 
@@ -47,16 +54,16 @@ export class StartEndWorkoutComponent implements OnInit {
    });
    this._sharedService.endButtonClicked.subscribe(data =>{
     this.endButtonIdFlag = data;
-    console.log("start btn value : "+ this.endButtonIdFlag);
+    console.log("end btn value : "+ this.endButtonIdFlag);
  });
   }
 
-  formatStartDate(startDt){
+  formatDate(startDt){
     const formattedDate = this.datePipe.transform(startDt,'dd/MM/yyyy');
     return formattedDate;
   }
 
-  formatStartTime(startTime){
+  formatTime(startTime){
     const formattedTime = this.datePipe.transform(startTime,'HH:mm:ss');
     //formattedTime = this.datePipe.transform(formattedTime, 'HH:mm:ss');
     return formattedTime;

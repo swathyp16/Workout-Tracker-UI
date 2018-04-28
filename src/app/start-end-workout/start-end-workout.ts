@@ -4,4 +4,5 @@ export interface IStartEndWorkout extends IAddWorkout{
     startTime: string;
     endDate: string;
     endTime: string;
+    startWorkoutFlag: boolean;
 }
