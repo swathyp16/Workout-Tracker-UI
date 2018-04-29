@@ -1,16 +1,32 @@
 .div-position{
     position: relative;
-    top: 60px;   
+    top: 49px;
+    background-image: url(../../assets/images/workout-bg4.jpeg);
+    background-repeat: no-repeat;
+    background-size: 1500px;
 }
 
-.category-position{
-    position: relative;
-    top: 80px;
-    left: 10px;
+.row{
+    height: 100vh;
 }
 
-.workoutCategory-tr{
+.td-style{
+    padding: 10px;
+}
+
+.form-container{
+    margin-top: 25px;
+    border: 0px solid;
+    padding: 50px 60px;
+    -webkit-box-shadow: -1px 4px 26px 20px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 4px 26px 20px rgba(0,0,0,0.75);
+    box-shadow: -1px 4px 26px 20px rgba(0,0,0,0.75); 
+    background-color: #252323;
+    opacity: 0.9;
+}
+
+.header{
+    color: white;
     position: relative;
-    top: 92px;
-    left: 12px;
+    left: 222px;
 }

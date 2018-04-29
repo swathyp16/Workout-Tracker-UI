@@ -59,7 +59,7 @@ export class AddWorkoutService{
     return body || {};
   }
   handleErrorObservable (error: Response | any) {
-    console.error(error);
+    console.error(error._body);
     return Observable.throw(error || "Oops !! Something went wrong");
   } 
 

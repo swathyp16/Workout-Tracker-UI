@@ -14,6 +14,8 @@ export class CategoryComponent implements OnInit {
   addCategory: IAddWorkoutCategory[];
   viewAllCategory: IAddWorkoutCategory[];
   deleteCategoryStatus : string;
+  isEditBtnClicked:boolean = false;
+  isReadOnly:boolean=true;
   constructor(private _workoutCategoryService: WorkoutCategoryService) { }
 
   ngOnInit() {
@@ -34,5 +36,22 @@ export class CategoryComponent implements OnInit {
     this.viewAllCategory.splice(index,1);
   }
 
+   editCategory(category,index,event){
+     var target = event.target || event.srcElement || event.currentTarget;
+     var idValue = target.value;
+     //debugger
+     //var fieldElement = <HTMLInputElement>document.getElementById('field');
+     if(idValue == "Edit"){
+       this.isEditBtnClicked = true;
+       target.value = "Save";
+       target.className="btn btn-success";
+       this.isReadOnly = false;
+    }else{
+      this.isEditBtnClicked = false;
+      target.value = "Edit";
+      target.className="btn btn-info";
+      this.isReadOnly = true;
+    }
+   }
  
 }

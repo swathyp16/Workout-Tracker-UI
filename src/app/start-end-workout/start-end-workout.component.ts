@@ -6,7 +6,9 @@ import { IStartEndWorkout } from '../start-end-workout/start-end-workout';
 import { IAddWorkout } from '../create-workout/create-workout';
 import { DatePipe } from '@angular/common';
 import { SharedServiceService } from './../shared-service.service';
-import { StartWorkoutService } from '../start-end-workout/start-end-workout.service'
+import { StartWorkoutService } from '../start-end-workout/start-end-workout.service';
+import { Response } from '@angular/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-start-end-workout',
@@ -20,7 +22,10 @@ export class StartEndWorkoutComponent implements OnInit {
   datePipe = new DatePipe("en-US");
   startButtonIdFlag: boolean;
   endButtonIdFlag: boolean;
-  startWorkoutStatus: string;
+  startWorkoutStatus: Response;
+ errorStatus: HttpErrorResponse;
+  successMessage: string = "";
+  errorMessage: string = "";
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -72,11 +77,27 @@ export class StartEndWorkoutComponent implements OnInit {
   onStartWorkoutFormSubmit(){
     this._startWorkoutService.startWorkout(this.startParams).subscribe(data => {
       this.startWorkoutStatus = data;
+      if(this.startWorkoutStatus.status == 200){
+        this.successMessage = "Workout Started";
+      }
+    },error =>{
+      this.errorStatus = error;
+      let body = error.json();
+      console.log("Error message: "+ body.error + body.message);
+      this.errorMessage = body.message?body.message:"Oops !! Something went wrong";
     });
   }
     onEndWorkoutFormSubmit(){
       this._startWorkoutService.startWorkout(this.startParams).subscribe(data => {
         this.startWorkoutStatus = data;
+        if(this.startWorkoutStatus.status == 200){
+          this.successMessage = "Workout Ended";
+        }
+      },error =>{
+        this.errorStatus = error;
+        let body = error.json();
+        console.log("Error message: "+ body.error + body.message);
+        this.errorMessage = body.message?body.message:"Oops !! Something went wrong";
       });
   }
 
