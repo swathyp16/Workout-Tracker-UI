@@ -1,9 +1,52 @@
 .editForm{
     position: relative;
-    top: 75px;
+    top: 45px;
 }
 
 .div-position{
     position: relative;
-    top: 100px;
+    top: 49px;
+    background-image: url(../../assets/images/workout-bg4.jpeg);
+    background-repeat: no-repeat;
+    background-size: 1500px;
+}
+
+
+.header{
+    color: white;
+    position: relative;
+    left: 222px;
+}
+
+.row{
+    height: 100vh;
+}
+
+.form-container{
+    border: 0px solid;
+    padding: 50px 60px;
+    -webkit-box-shadow: -1px 4px 26px 20px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 4px 26px 20px rgba(0,0,0,0.75);
+    box-shadow: -1px 4px 26px 20px rgba(0,0,0,0.75); 
+    background-color: #252323;
+    opacity: 0.9;
+}
+
+.label{
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+}
+
+.btn-style{
+    margin-top: 37px;
+    margin-left: 66px;
+}
+
+.group{
+    padding: 5px;
+}
+
+.submit-btn{
+    margin-right: 20px;
 }

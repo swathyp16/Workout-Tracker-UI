@@ -19,11 +19,12 @@ import { IAddWorkout } from '../create-workout/create-workout';
   providers: [EditWorkoutService,WorkoutCategoryService,AddWorkoutService]
 })
 export class EditWorkoutComponent implements OnInit {
-  //public editWorkoutsForm: FormGroup; 
   editDetails: IAddWorkout[];
   viewCategoryForEdit: IAddWorkoutCategory[];
   categoryList:IAddWorkoutCategory = new IAddWorkoutCategory();
   addWorkout: IAddWorkout[];
+  successMessage: string = "";
+  errorMessage:string = "";
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -35,8 +36,8 @@ export class EditWorkoutComponent implements OnInit {
     this._editWorkoutService.fetchEditWorkoutDetails(id)
     .subscribe(data =>{
     this.editDetails = data;
-      console.log("data is !!!!! : "+ this.editDetails)
-    });}
+    });
+  }
 
   ngOnInit() { 
     this._workoutCategoryService.viewAllCategory().subscribe(viewCategoryForEdit => this.viewCategoryForEdit = viewCategoryForEdit);
@@ -53,8 +54,16 @@ export class EditWorkoutComponent implements OnInit {
     }
 
     onEditWorkoutFormSubmit(): void{
-      console.log("edited data: " + JSON.stringify(this.editDetails));
-      this._addWorkoutService.editWorkout(this.editDetails).subscribe(addedData => this.addWorkout = addedData);
+      this._addWorkoutService.editWorkout(this.editDetails).subscribe(data => {
+        this.addWorkout = data;
+        this.successMessage = "Successfully updated the workout details";
+      },error =>{
+        this.errorMessage = "Oops !! Something went wrong";
+      });
+    }
+
+    OnCancelUpdate(){
+      this.router.navigate(['/viewAll']);
     }
     
 

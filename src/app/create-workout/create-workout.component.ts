@@ -4,6 +4,9 @@ import { AddWorkoutService } from './create-workout.service';
 import { IViewWorkoutCategory } from './view-workout-category';
 import { FormsModule,ReactiveFormsModule,FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { Response } from '@angular/http';
+import 'rxjs/add/operator/catch';
+
 @Component({
   selector: 'app-create-workout',
   templateUrl: './create-workout.component.html',
@@ -11,37 +14,38 @@ import { NgForm } from '@angular/forms';
   providers: [AddWorkoutService]
 })
 export class CreateWorkoutComponent implements OnInit {
-  //workout = new IAddWorkout[];   
   viewCategoryList: IViewWorkoutCategory[];
   selectedCategory:IViewWorkoutCategory = new IViewWorkoutCategory();
 
- addWorkout: IAddWorkout[];
-  constructor(private _addWorkoutService: AddWorkoutService) {  
-    
-    console.log("hurrayyy !!!!!!!!!!!" + JSON.stringify(this.addWorkout));
-   }
+ addWorkout: Response;
+ successMessage: string = "";
+ errorMessage: string = "";
+  constructor(private _addWorkoutService: AddWorkoutService) { }
   
   ngOnInit() {
     this._addWorkoutService.viewWorkoutCategory().subscribe(viewCategoryList => this.viewCategoryList = viewCategoryList);
-    console.log("yeahhhh !!!!!!!!!!!");
-   
   }  
 
   onAddWorkoutFormSubmit(addForm : NgForm): void{
-    //console.log("addWorkoutForm : " + JSON.stringify(addForm.value));
-    this._addWorkoutService.addWorkout(addForm.value).subscribe(addedData => this.addWorkout = addedData);
+    this._addWorkoutService.addWorkout(addForm.value).subscribe(data => {
+      this.addWorkout = data;
+       if(this.addWorkout.status == 200){
+          this.successMessage = "Successfully added the workout item";
+        }
+      },error =>{
+        this.errorMessage = "Oops !! Something went wrong";
+      }
+      );
   }
 
   onSelect(args) { 
-debugger
-//console.log("onSelect selectedCategoryId : " + JSON.stringify(args.target.options[0]));
-this.selectedCategory = null;
-    for (var i = 0; i < this.viewCategoryList.length; i++)
-    {
-      if (this.viewCategoryList[i].categoryName == args.target.options[args.target.selectedIndex].text) {
-        this.selectedCategory = this.viewCategoryList[i];
-      }
+    this.selectedCategory = null;
+        for (var i = 0; i < this.viewCategoryList.length; i++)
+        {
+          if (this.viewCategoryList[i].categoryName == args.target.options[args.target.selectedIndex].text) {
+            this.selectedCategory = this.viewCategoryList[i];
+          }
+        }
     }
-}
 
 }

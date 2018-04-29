@@ -1,95 +1,67 @@
-<div class="div-position">
-  <h1 *ngIf="startButtonIdFlag">
+<div class="div-position container-fluid">
+  <h1 *ngIf="startButtonIdFlag" class="header">
       Start Workout
   </h1> 
-  <h1 *ngIf="endButtonIdFlag">
+  <h1 *ngIf="endButtonIdFlag" class="header">
       End Workout
   </h1> 
-  <form *ngIf="startButtonIdFlag" #startWorkouts="ngForm" class="editForm" (ngSubmit)="onStartWorkoutFormSubmit()">
+  <div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12"></div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+  <form *ngIf="startButtonIdFlag" #startWorkouts="ngForm" class="editForm form-container" (ngSubmit)="onStartWorkoutFormSubmit()">
     <div>
       <div  *ngFor = "let data of startParams; let i = index">
-      <div class="form-group">
-          <div class="col-sm-10">
-            <label class="col-sm-2 form-control-label">Title: </label>
-            <div class="col-sm-4">
-              <input class="form-control" name="workoutTitle" [value]="data.workoutTitle" [(ngModel)]="data.workoutTitle" (input)="data.workoutTitle=$event.target.value" type="text" readonly>
-            </div>
-          </div>
-       </div>
-       <div class="form-group">
-      <div class="col-sm-10">
-          <label class="col-sm-2 form-control-label">Note: </label>
-          <div class="col-sm-4">
-              <input class="form-control" name="workoutNote" [value]="data.workoutNote" [(ngModel)]="data.workoutNote" (input)="data.workoutNote=$event.target.value" type="text">
-          </div>
-      </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-10">
-            <label class="col-sm-2 form-control-label">Start Date: </label>
-            <div class="col-sm-4">
-                <input class="form-control" name="startDate" [value]="data.startDate" [(ngModel)]="data.startDate" (input)="data.startDate=$event.target.value" type="text">
-            </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-10">
-            <label  class="col-sm-2 form-control-label">Start Time: </label>
-            <div class="col-sm-4">
-                <input class="form-control" name="startTime" [value]="data.startTime" [(ngModel)]="data.startTime" (input)="data.startTime=$event.target.value" type="text">
-            </div>
-        </div>
-        </div>
+      <div class="form-group group">
+        <label class="form-control-label label">Title: </label>
+        <input class="form-control" name="workoutTitle" [value]="data.workoutTitle" [(ngModel)]="data.workoutTitle" (input)="data.workoutTitle=$event.target.value" type="text" readonly>
+     </div>
+       <div class="form-group group">
+        <label class="form-control-label label">Note: </label>
+        <input class="form-control" name="workoutNote" [value]="data.workoutNote" [(ngModel)]="data.workoutNote" (input)="data.workoutNote=$event.target.value" type="text">
+    </div>
+      <div class="form-group group">
+        <label class="form-control-label label">Start Date: </label>
+        <input class="form-control" name="startDate" [value]="data.startDate" [(ngModel)]="data.startDate" (input)="data.startDate=$event.target.value" type="text">
+    </div>
+    <div class="form-group group">
+        <label  class="form-control-label label">Start Time: </label>
+        <input class="form-control" name="startTime" [value]="data.startTime" [(ngModel)]="data.startTime" (input)="data.startTime=$event.target.value" type="text">
+    </div>
   </div>
   <div class="d-flex flex-row buttons">
-    <input type="submit" class="btn btn-info p-2" value="Start">
-    <input type="button" class="btn btn-info p-2" value="Cancel">
+    <input type="submit" class="btn btn-success submit-btn" value="Start">
+    <input type="button" class="btn btn-danger submit-btn" value="Cancel" (click)="onCancelBtnPress()">
   </div>
 
 </div>
   </form>
-
-  <form *ngIf="endButtonIdFlag" #endWorkouts="ngForm" class="editForm" (ngSubmit)="onEndWorkoutFormSubmit()">
+  <form *ngIf="endButtonIdFlag" #endWorkouts="ngForm" class="editForm form-container" (ngSubmit)="onEndWorkoutFormSubmit()">
       <div>
         <div  *ngFor = "let data of startParams; let i = index">
-        <div class="form-group">
-            <div class="col-sm-10">
-              <label class="col-sm-2 form-control-label">Title: </label>
-              <div class="col-sm-4">
-                <input class="form-control" name="workoutTitle" [value]="data.workoutTitle" [(ngModel)]="data.workoutTitle" (input)="data.workoutTitle=$event.target.value" type="text" readonly>
-              </div>
-            </div>
-         </div>
-         <div class="form-group">
-        <div class="col-sm-10">
-            <label class="col-sm-2 form-control-label">Note: </label>
-            <div class="col-sm-4">
-                <input class="form-control" name="workoutNote" [value]="data.workoutNote" [(ngModel)]="data.workoutNote" (input)="data.workoutNote=$event.target.value" type="text">
-            </div>
+        <div class="form-group group">
+            <label class="form-control-label label">Title: </label>
+            <input class="form-control" name="workoutTitle" [value]="data.workoutTitle" [(ngModel)]="data.workoutTitle" (input)="data.workoutTitle=$event.target.value" type="text" readonly>
         </div>
+        <div class="form-group group">
+            <label class="form-control-label label">Note: </label>
+            <input class="form-control" name="workoutNote" [value]="data.workoutNote" [(ngModel)]="data.workoutNote" (input)="data.workoutNote=$event.target.value" type="text">
         </div>
-        <div class="form-group">
-          <div class="col-sm-10">
-              <label  class="col-sm-2 form-control-label">End Date: </label>
-              <div class="col-sm-4">
-                  <input class="form-control" name="endDate" [value]="data.endDate" [(ngModel)]="data.endDate" (input)="data.endDate=$event.target.value" type="text">
-              </div>
-          </div>
+        <div class="form-group group">
+              <label  class="form-control-label label">End Date: </label>
+              <input class="form-control" name="endDate" [value]="data.endDate" [(ngModel)]="data.endDate" (input)="data.endDate=$event.target.value" type="text">
         </div>
-        <div class="form-group">
-          <div class="col-sm-10">
-              <label class="col-sm-2 form-control-label">End Time: </label>
-              <div class="col-sm-4">
-                  <input class="form-control" name="endTime" [value]="data.endTime" [(ngModel)]="data.endTime" (input)="data.endTime=$event.target.value" type="text">
-              </div>
-          </div>
-          </div>
+        <div class="form-group group">
+              <label class="form-control-label label">End Time: </label>
+              <input class="form-control" name="endTime" [value]="data.endTime" [(ngModel)]="data.endTime" (input)="data.endTime=$event.target.value" type="text">
+        </div>>
     </div>
     <div class="d-flex flex-row buttons">
-      <input  type="submit" class="btn btn-info p-2" value="End">
-      <input type="button" class="btn btn-info p-2" value="Cancel">
+      <input  type="submit" class="btn btn-success submit-btn" value="End">
+      <input type="button" class="btn btn-danger submit-btn" value="Cancel" (click)="onCancelBtnPress()">
     </div>
   
   </div>
     </form>
+</div>
+</div>
 </div>

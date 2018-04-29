@@ -23,6 +23,7 @@ export class StartEndWorkoutComponent implements OnInit {
   startWorkoutStatus: string;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private _editWorkoutService: EditWorkoutService,
     private _sharedService: SharedServiceService,
     private _startWorkoutService: StartWorkoutService
@@ -65,25 +66,23 @@ export class StartEndWorkoutComponent implements OnInit {
 
   formatTime(startTime){
     const formattedTime = this.datePipe.transform(startTime,'HH:mm:ss');
-    //formattedTime = this.datePipe.transform(formattedTime, 'HH:mm:ss');
     return formattedTime;
   }
 
   onStartWorkoutFormSubmit(){
-    console.log("start workout data: " + JSON.stringify(this.startParams));
     this._startWorkoutService.startWorkout(this.startParams).subscribe(data => {
       this.startWorkoutStatus = data;
-      console.log("startWorkoutStatus : " + this.startWorkoutStatus);
     });
   }
     onEndWorkoutFormSubmit(){
-      console.log("End workout data: " + JSON.stringify(this.startParams));
       this._startWorkoutService.startWorkout(this.startParams).subscribe(data => {
         this.startWorkoutStatus = data;
-        console.log("startWorkoutStatus : " + this.startWorkoutStatus);
       });
   }
 
+  onCancelBtnPress(){
+    this.router.navigate(['/viewAll']);
+  }
 
  
 }
