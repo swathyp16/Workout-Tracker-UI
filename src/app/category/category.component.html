@@ -21,11 +21,11 @@
             <tr *ngFor = "let category of viewAllCategory; let i = index">
               <td class="td-style">
                 <div class="viewAllWorkout-font">
-                  <input type="text" class="form-control" [attr.id]="'category-' + i" [value]="category.categoryName" [readonly]="isReadOnly">
+                  <input type="text" class="form-control" #textbox [attr.id]="'category-' + i" [value]="category.categoryName" [readonly]="i == readOnly?false:true">
                 </div>
               </td>
               <td class="td-style">
-                <input class="btn btn-info"  type="button" [attr.id]="'editBtn' + i" value="Edit" (click)="editCategory(category,i,$event)">
+                <input class="btn btn-info"  type="button" [attr.id]="'editBtn' + i" value="Edit" (click)="editCategory(category,i,$event,textbox)">
             </td>
             <td class="td-style">
                 <input class="btn btn-danger" type="button" value="Delete" (click)="deleteCategory(category,i)">

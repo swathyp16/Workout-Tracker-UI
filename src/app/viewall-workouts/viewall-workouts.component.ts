@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewAllWorkoutService } from './viewall-workout.service';
 import { IViewAllWorkout } from './viewall-workout';
 import { SharedServiceService } from './../shared-service.service';
+import { SearchFilterPipe } from './../search-filter.pipe';
 
 @Component({
   selector: 'app-viewall-workouts',

@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { EditWorkoutComponent } from './edit-workout/edit-workout.component';
 import { StartEndWorkoutComponent } from './start-end-workout/start-end-workout.component';
 import { SharedServiceService } from './shared-service.service';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 const appRoutes: Routes = [
   //{path : 'home', component: AppComponent},
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     PagenotfoundComponent,
     HomeComponent,
     EditWorkoutComponent,
-    StartEndWorkoutComponent
+    StartEndWorkoutComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,

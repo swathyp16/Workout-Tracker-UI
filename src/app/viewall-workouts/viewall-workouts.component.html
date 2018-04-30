@@ -8,8 +8,10 @@
         <div class="col-md-4 col-sm-4 col-xs-12">
   <form #viewAllWorkouts="ngForm">
   <table>
-    <tr class="workoutEntry-tr col-xs-12" *ngFor = "let workoutData of viewAllWorkout; let i = index">
-      <!-- <span>{{workoutData.workoutTitle}}</span> -->
+    <form id="filterForm">
+        <input type="text" placeholder="Search here" class="search-box" name="searchText" [(ngModel)]="searchText">
+    </form>
+    <tr class="workoutEntry-tr col-xs-12" *ngFor = "let workoutData of viewAllWorkout | searchFilter:searchText; let i = index">
       <td class="workout-td">
         <div class="viewAllWorkout-font">{{workoutData.workoutTitle}}</div>
         <div class="btn-grp">
