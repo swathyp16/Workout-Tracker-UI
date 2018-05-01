@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { RouterModule , Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppComponent } from './app.component';
 import { CreateWorkoutComponent } from './create-workout/create-workout.component';
 import { CategoryComponent } from './category/category.component';
@@ -19,6 +18,8 @@ import { StartEndWorkoutComponent } from './start-end-workout/start-end-workout.
 import { SharedServiceService } from './shared-service.service';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { CategorySearchPipe } from './category-search.pipe';
+import { GoogleChartComponent } from './google-chart/google-chart.component';
+
 
 const appRoutes: Routes = [
   //{path : 'home', component: AppComponent},
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     EditWorkoutComponent,
     StartEndWorkoutComponent,
     SearchFilterPipe,
-    CategorySearchPipe
+    CategorySearchPipe,
+    GoogleChartComponent
   ],
   imports: [
     BrowserModule,
