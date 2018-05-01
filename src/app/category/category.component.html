@@ -1,13 +1,18 @@
 
- <div class="div-position container-fluid">
-    <h1 class="header">
+ <html>
+   <body>
+     <div class="div-position container-fluid">
+    <h1 class="header" align="center">
         Add Category
       </h1>
       <div class="row">
       <div class="col-md-4 col-sm-4 col-xs-12"></div>
       <div class="col-md-4 col-sm-4 col-xs-12">
       <form #addCategoryForm="ngForm" class="form-horizontal form-container" (ngSubmit)="addWorkoutCategory(addCategoryForm)">
-      <div class="form-group">
+          <form id="categoryFilterForm">
+              <input type="text" placeholder="Search here" class="search-box" name="categorySearchText" [(ngModel)]="categorySearchText">
+          </form>
+        <div class="form-group">
         <div class="col-xs-10">
         <input class="form-control" name="categoryName" [(ngModel)]="categoryName" type="text">
         </div>
@@ -18,7 +23,7 @@
         </span>
         </div>
       <table>
-            <tr *ngFor = "let category of viewAllCategory; let i = index">
+            <tr *ngFor = "let category of viewAllCategory | categorySearch:categorySearchText; let i = index">
               <td class="td-style">
                 <div class="viewAllWorkout-font">
                   <input type="text" class="form-control" #textbox [attr.id]="'category-' + i" [value]="category.categoryName" [readonly]="i == readOnly?false:true">
@@ -36,3 +41,5 @@
           </div>
       </div>
 </div>
+   </body>
+ </html>

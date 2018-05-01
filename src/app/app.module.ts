@@ -18,6 +18,7 @@ import { EditWorkoutComponent } from './edit-workout/edit-workout.component';
 import { StartEndWorkoutComponent } from './start-end-workout/start-end-workout.component';
 import { SharedServiceService } from './shared-service.service';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { CategorySearchPipe } from './category-search.pipe';
 
 const appRoutes: Routes = [
   //{path : 'home', component: AppComponent},
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     HomeComponent,
     EditWorkoutComponent,
     StartEndWorkoutComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    CategorySearchPipe
   ],
   imports: [
     BrowserModule,

@@ -26,6 +26,8 @@ export class StartEndWorkoutComponent implements OnInit {
  errorStatus: HttpErrorResponse;
   successMessage: string = "";
   errorMessage: string = "";
+  isDisableStartBtn: boolean = false;
+  isDisableEndBtn: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -79,6 +81,8 @@ export class StartEndWorkoutComponent implements OnInit {
       this.startWorkoutStatus = data;
       if(this.startWorkoutStatus.status == 200){
         this.successMessage = "Workout Started";
+        this.isDisableStartBtn = true;
+        this._sharedService.setDisableEndButtonFlag(false);
       }
     },error =>{
       this.errorStatus = error;
@@ -86,12 +90,14 @@ export class StartEndWorkoutComponent implements OnInit {
       console.log("Error message: "+ body.error + body.message);
       this.errorMessage = body.message?body.message:"Oops !! Something went wrong";
     });
+    console.log("isDisableStartBtn :  " + this.isDisableStartBtn);
   }
     onEndWorkoutFormSubmit(){
       this._startWorkoutService.startWorkout(this.startParams).subscribe(data => {
         this.startWorkoutStatus = data;
         if(this.startWorkoutStatus.status == 200){
           this.successMessage = "Workout Ended";
+          this.isDisableEndBtn = true;
         }
       },error =>{
         this.errorStatus = error;
@@ -103,6 +109,16 @@ export class StartEndWorkoutComponent implements OnInit {
 
   onCancelBtnPress(){
     this.router.navigate(['/viewAll']);
+  }
+
+  disableStartBtn(){
+    console.log("this.isDisableStartBtn: " + this.isDisableStartBtn);
+    return this.isDisableStartBtn;
+  }
+
+  disableEndBtn(){
+    console.log("this.isDisableEndBtn: " + this.isDisableEndBtn);
+    return this.isDisableEndBtn;
   }
 
  

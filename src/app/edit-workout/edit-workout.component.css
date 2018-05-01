@@ -1,3 +1,9 @@
+
+body{
+    overflow-x: hidden;
+    width: 100%; 
+}
+
 .editForm{
     position: relative;
     top: 45px;
@@ -5,7 +11,7 @@
 
 .div-position{
     position: relative;
-    top: 49px;
+    top: 0px;
     background-image: url(../../assets/images/workout-bg4.jpeg);
     background-repeat: no-repeat;
     background-size: 1500px;
@@ -15,7 +21,7 @@
 .header{
     color: white;
     position: relative;
-    left: 222px;
+    /* left: 222px; */
 }
 
 .row{
