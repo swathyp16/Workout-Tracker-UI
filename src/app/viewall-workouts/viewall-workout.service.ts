@@ -10,14 +10,21 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ViewAllWorkoutService{
-  constructor(private _http: HttpClient){
-  
+  options: RequestOptions;
+  headers: Headers;
+
+  constructor(private _httpClient: HttpClient,
+    private _http: Http){
+    this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/json');  
+    this.headers.append('Accept', 'application/json, */*'); 
+    this.options = new RequestOptions({ headers: this.headers });
   }
   
 
   viewAllWorkout(): Observable<IViewAllWorkout[]>{
     console.log("<--------- Service call inititated---------------->");
-    return this._http.get("http://localhost:8090/viewAllWorkout").map(this.extractData).catch(this.handleErrorObservable);
+    return this._httpClient.get("http://localhost:8090/viewAllWorkout").map(this.extractData).catch(this.handleErrorObservable);
     //map((response: Response) => <IViewAllWorkout[]> response.json())
   }
   
@@ -33,15 +40,17 @@ export class ViewAllWorkoutService{
     return Observable.throw(error.message || error);
   } 
 
-  deleteWorkout(workoutData):Observable<string>{
-    var json = JSON.stringify(workoutData);
-    var params = json;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
+  deleteWorkout(workoutData):Observable<any>{
+    var params = JSON.stringify(workoutData);
+    // var params = json;
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json'
+    //   })
+    // };
     console.log("<--------- Service call inititated---------------->"+ params);
-    return this._http.post("http://localhost:8090/deleteWorkout",params,httpOptions).map((response: Response) =>  response.json())
+    return this._http.post("http://localhost:8090/deleteWorkout",params,this.options)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
   }
 }

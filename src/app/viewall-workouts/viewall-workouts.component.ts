@@ -12,8 +12,10 @@ import { SearchFilterPipe } from './../search-filter.pipe';
 })
 export class ViewallWorkoutsComponent implements OnInit {
  viewAllWorkout: IViewAllWorkout[];
- deleteWorkoutStatus: string;
+ deleteWorkoutStatus: Response;
  disableEndButton: boolean = true;
+ successMessage: string = "";
+ errorMessage: string = "";
   constructor(
     private _viewallWorkoutService: ViewAllWorkoutService,  
     private _sharedService: SharedServiceService
@@ -29,8 +31,17 @@ export class ViewallWorkoutsComponent implements OnInit {
   }
 
   deleteWorkout(workoutData,index){
-    this._viewallWorkoutService.deleteWorkout(workoutData).subscribe(deleteWorkoutStatus => this.deleteWorkoutStatus = deleteWorkoutStatus);
-    this.viewAllWorkout.splice(index,1);
+    this._viewallWorkoutService.deleteWorkout(workoutData)
+    .subscribe(data =>{
+      this.deleteWorkoutStatus = data;
+      if(this.deleteWorkoutStatus.status == 200){
+        console.log("inside delete workout");
+        this.successMessage = "Successfully deleted the Workout item";
+        this.viewAllWorkout.splice(index,1);
+      }
+    },error =>{
+      this.errorMessage = "Oops !! Something went wrong";
+    });    
   }
 
   onClick(event){

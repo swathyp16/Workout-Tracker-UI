@@ -31,12 +31,12 @@ export class CategoryComponent implements OnInit {
         this.addCategory = data;
         if(this.addCategory.status == 200){
           this.successMessage = "Successfully added the Category";
+          this.viewAllCategory.splice( 1, 0, addCategoryForm.value);
         }
       },error =>{
         this.errorMessage = "Oops !! Something went wrong";
       }
-    );    
-    this.viewAllCategory.splice( 1, 0, addCategoryForm.value);
+    );        
   }
 
   deleteCategory(category,index){
@@ -47,12 +47,13 @@ export class CategoryComponent implements OnInit {
       if(this.deleteCategoryStatus.status == 200){
         console.log("inside delete category");
         this.successMessage = "Successfully deleted the Category";
+        this.viewAllCategory.splice(index,1);
       }
     },error =>{
       this.errorMessage = "Oops !! Something went wrong";
     });
     console.log("successMessage : "+ this.successMessage);
-    this.viewAllCategory.splice(index,1);
+    
   }
 
    editCategory(category,index,event,textbox){
