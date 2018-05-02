@@ -11,41 +11,52 @@ import { NgForm } from '@angular/forms';
 
 @Injectable()
 export class WorkoutCategoryService{
+  options: RequestOptions;
+  headers: Headers;
 
-  constructor(private _http: HttpClient){
-  
+  constructor(private _httpClient: HttpClient,
+    private _http: Http){
+    this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/json');  
+    this.headers.append('Accept', 'application/json, */*'); 
+    this.options = new RequestOptions({ headers: this.headers });
   }  
 
-  addCategory(addCategoryForm : NgForm): Observable<IAddWorkoutCategory[]>{
+  addCategory(addCategoryForm : NgForm): Observable<any>{
    // addCategory(addCategoryForm : NgForm): Observable<String>{
-    var json = JSON.stringify(addCategoryForm.value);
-    var params = json;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
+    var params = JSON.stringify(addCategoryForm.value);
+    //var params = json;
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json'
+    //   })
+    // };
     console.log("<--------- Service call inititated---------------->"+ params);
-    return this._http.post("http://localhost:8090/createCategory",params,httpOptions).map((response: Response) => <IAddWorkoutCategory[]> response.json())
+    return this._http.post("http://localhost:8090/createCategory",params,this.options)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+    //.map((response: Response) => <IAddWorkoutCategory[]> response.json())
     //return this._http.post("http://localhost:8090/createCategory",params,httpOptions).map((response: Response) => <String> response.json())
   }
 
   viewAllCategory():Observable<IAddWorkoutCategory[]>{
     console.log("inside viewAllCategory");
     console.log("<--------- Service call inititated---------------->");
-    return this._http.get("http://localhost:8090/viewAllCategory").map(this.extractData).catch(this.handleErrorObservable);
+    return this._httpClient.get("http://localhost:8090/viewAllCategory").map(this.extractData).catch(this.handleErrorObservable);
   }
   
-  deleteCategory(category):Observable<string>{
-    var json = JSON.stringify(category);
-    var params = json;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
+  deleteCategory(category):Observable<any>{
+    var params = JSON.stringify(category);
+    //var params = json;
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json'
+    //   })
+    // };
     console.log("<--------- Service call inititated---------------->"+ params);
-    return this._http.post("http://localhost:8090/deleteCategory",params,httpOptions).map((response: Response) =>  response.json())
+    return this._http.post("http://localhost:8090/deleteCategory",params,this.options)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
   }
 
   extractData(res: Response) {
@@ -55,6 +66,6 @@ export class WorkoutCategoryService{
   }
   handleErrorObservable (error: Response | any) {
     console.error(error.message || error);
-    return Observable.throw(error.message || error);
+    return Observable.throw(error || "Oops !! Something went wrong");
   } 
 }
