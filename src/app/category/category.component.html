@@ -34,7 +34,7 @@
             <tr *ngFor = "let category of viewAllCategory | categorySearch:categorySearchText; let i = index">
               <td class="td-style">
                 <div class="viewAllWorkout-font">
-                  <input type="text" class="form-control" #textbox [attr.id]="'category-' + i"  [value]="category.categoryName" [attr.disabled]="category.isEdit==true? true:false">
+                  <input type="text" class="form-control" #textbox [attr.id]="'category-' + i"  [value]="category.categoryName" [attr.disabled]="category.isEdit?null:''">
                 </div>
               </td>
               <td class="td-style">

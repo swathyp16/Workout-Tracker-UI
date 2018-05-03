@@ -39,7 +39,7 @@ export class StartEndWorkoutComponent implements OnInit {
     this._editWorkoutService.fetchEditWorkoutDetails(id)
     .subscribe(data =>{
     this.fetchedDetails = data;
-      console.log("fetched data is !!!!! : "+ this.fetchedDetails +"btn: "+ this.startButtonIdFlag);
+      console.log("fetched data is !!!!! : "+ JSON.stringify(this.fetchedDetails));
        this.startParams = <IStartEndWorkout[]>this.fetchedDetails;
        if(this.startButtonIdFlag){
         this.startParams[0].startDate = this.formatDate(Date.now());
@@ -83,6 +83,7 @@ export class StartEndWorkoutComponent implements OnInit {
         this.successMessage = "Workout Started";
         this.isDisableStartBtn = true;
         this._sharedService.setDisableEndButtonFlag(false);
+       // this.+shared
       }
     },error =>{
       this.errorStatus = error;
@@ -93,6 +94,7 @@ export class StartEndWorkoutComponent implements OnInit {
     console.log("isDisableStartBtn :  " + this.isDisableStartBtn);
   }
     onEndWorkoutFormSubmit(){
+      console.log("this.startParams : " + this.startParams);
       this._startWorkoutService.startWorkout(this.startParams).subscribe(data => {
         this.startWorkoutStatus = data;
         if(this.startWorkoutStatus.status == 200){

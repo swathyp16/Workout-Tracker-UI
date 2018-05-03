@@ -61,28 +61,27 @@ export class CategoryComponent implements OnInit {
   }
 
    editCategory(category,index,event,textbox){
-     debugger
-    console.log("viewAllCategory Response : " +  this.viewAllCategory + "category:"+ category);
-    //category.isEdit = false;
      var target = event.target || event.srcElement || event.currentTarget;
      var idValue = target.value;
      if(idValue == "Edit"){
        this.isEditBtnClicked = true;
        target.value = "Save";
        target.className="btn btn-success";
+       for(var i= 0 ; i < this.viewAllCategory.length;i++){
+        if(this.viewAllCategory[i].categoryName == category.categoryName){
+          this.viewAllCategory[i].isEdit = true;
+        }
+      }
     }else{
       this.isEditBtnClicked = false;
       target.value = "Edit";
       target.className="btn btn-info";
-    }
-    for(var i = 0; i < this.viewAllCategory.length ; i++){
-      if(index == i){
-        this.viewAllCategory[i].isEdit = true;
-        console.log("this.viewAllCategory[i]:  " + this.viewAllCategory[i].isEdit);
+      for(var i= 0 ; i < this.viewAllCategory.length;i++){
+        if(this.viewAllCategory[i].categoryName == category.categoryName){
+          this.viewAllCategory[i].isEdit = false;
+        }
       }
     }
-   // console.log("category.isEdit : " + this.viewAllCategory[i].isEdit);
-    
    }
  
 }

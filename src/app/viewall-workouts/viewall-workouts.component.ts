@@ -44,20 +44,33 @@ export class ViewallWorkoutsComponent implements OnInit {
     });    
   }
 
-  onClick(event){
+  onClick(event,workoutData,index){
     var target = event.target || event.srcElement || event.currentTarget;
     var idAttr = target.value;
     //event.disableEndButton = true; // ?
    if(idAttr == "Start"){
       this._sharedService.setStartBtnFlag(true);
+      //this._sharedService.setDisableEndButtonFlag(false);     
     } else if(idAttr == "End"){
       this._sharedService.setEndBtnFlag(true); 
     }
+    // debugger
+    // for(var i= 0 ; i < this.viewAllWorkout.length;i++){
+    //   if(this.viewAllWorkout[i].workoutTitle == workoutData.workoutTitle){
+    //     if(this._sharedService.getDisableEndButtonFlag() == false){
+    //       console.log("INSIDE LOOP 11111111111111");
+    //       this.viewAllWorkout[i].isEndButtonClicked = true;
+    //     }else{
+    //       console.log("INSIDE LOOP 2222222222222222222");
+    //       this.viewAllWorkout[i].isEndButtonClicked = false;
+    //     }
+    //   }
+    // }
   }
 
-  fnDisableEndButton(index){
-    console.log("this.disableEndButton: " + this.disableEndButton);
-    return this.disableEndButton;
-  }
+  // fnDisableEndButton(index){
+  //   console.log("this.disableEndButton: " + this.disableEndButton);
+  //   return this.disableEndButton;
+  // }
 
 }

@@ -4,5 +4,6 @@ export interface IViewAllWorkout{
          workoutNote: string;
          caloriesBurnt: string;
          categoryId: string;
+         isEndButtonClicked: boolean;
     
 }
