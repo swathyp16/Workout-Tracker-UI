@@ -21,7 +21,11 @@ export class CategoryComponent implements OnInit {
   constructor(private _workoutCategoryService: WorkoutCategoryService) { }
 
   ngOnInit() {
-    this._workoutCategoryService.viewAllCategory().subscribe(viewAllCategory => this.viewAllCategory = viewAllCategory);
+    this._workoutCategoryService.viewAllCategory()
+    .subscribe(data => {
+      debugger
+      this.viewAllCategory = data; 
+    });
   }
 
   addWorkoutCategory(addCategoryForm : NgForm):void{
@@ -59,7 +63,7 @@ export class CategoryComponent implements OnInit {
    editCategory(category,index,event,textbox){
      debugger
     console.log("viewAllCategory Response : " +  this.viewAllCategory + "category:"+ category);
-    category.isEdit = false;
+    //category.isEdit = false;
      var target = event.target || event.srcElement || event.currentTarget;
      var idValue = target.value;
      if(idValue == "Edit"){
@@ -71,7 +75,13 @@ export class CategoryComponent implements OnInit {
       target.value = "Edit";
       target.className="btn btn-info";
     }
-    console.log("category.isEdit : " + category.isEdit);
+    for(var i = 0; i < this.viewAllCategory.length ; i++){
+      if(index == i){
+        this.viewAllCategory[i].isEdit = true;
+        console.log("this.viewAllCategory[i]:  " + this.viewAllCategory[i].isEdit);
+      }
+    }
+   // console.log("category.isEdit : " + this.viewAllCategory[i].isEdit);
     
    }
  

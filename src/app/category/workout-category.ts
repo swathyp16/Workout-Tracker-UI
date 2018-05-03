@@ -1,4 +1,4 @@
 export class IAddWorkoutCategory{
     categoryName: string;
-    isEdit: boolean = true;
+    isEdit: boolean = false;
 }

@@ -35,7 +35,8 @@
             <input class="btn btn-success" type="button" value="Start" (click)="onClick($event)" [routerLink]="['/startWorkout', workoutData.workoutId]">
           </span>
           <span class="btn-span">
-            <input class="btn btn-danger" type="button"  value="End" (click)="onClick($event)" [disabled]="fnDisableEndButton(i)" [routerLink]="['/startWorkout', workoutData.workoutId]">
+            <input class="btn btn-danger" type="button"  value="End" (click)="onClick($event)" [routerLink]="['/startWorkout', workoutData.workoutId]">
+            <!-- [disabled]="fnDisableEndButton(i)"  -->
           </span>
         </div>
       </td>

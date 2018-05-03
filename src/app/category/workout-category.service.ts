@@ -42,7 +42,9 @@ export class WorkoutCategoryService{
   viewAllCategory():Observable<IAddWorkoutCategory[]>{
     console.log("inside viewAllCategory");
     console.log("<--------- Service call inititated---------------->");
-    return this._httpClient.get("http://localhost:8090/viewAllCategory").map(this.extractData).catch(this.handleErrorObservable);
+    return this._httpClient.get("http://localhost:8090/viewAllCategory")
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
   }
   
   deleteCategory(category):Observable<any>{

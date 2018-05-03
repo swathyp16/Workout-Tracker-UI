@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {GoogleChartComponent} from '../google-chart/google-chart.component';
+import { ITrackWorkouts } from './tracker';
+import { WorkoutTrackerService } from './tracker.service'
 
 @Component({
   selector: 'app-tracker',
   templateUrl: './tracker.component.html',
-  styleUrls: ['./tracker.component.css']
+  styleUrls: ['./tracker.component.css'],
+  providers: [WorkoutTrackerService]
 })
 export class TrackerComponent implements OnInit {
-
-  constructor() { }
+trackerData : ITrackWorkouts[];
+  constructor(private _workoutTrackerService: WorkoutTrackerService) { }
 
   ngOnInit() {
+    this._workoutTrackerService.fetchWorkoutTrackerDetails()
+    .subscribe(data => {
+        this.trackerData = data;
+    })
   }
 
   public bar_ChartOptions = {
