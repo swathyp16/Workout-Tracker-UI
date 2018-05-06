@@ -30,10 +30,13 @@ weeklyCaloriesBurnt : number = 0;
         this.trackerData = data;
         //if(this.trackerData[0] != undefined){
             console.log("Tracker data : " + this.trackerData);
-           
+            this.OnClick();          
 //}        
     })
   }
+
+  
+
     colors = [
         { 
         backgroundColor: 'rgba(30, 169, 224, 0.8)'
@@ -41,7 +44,16 @@ weeklyCaloriesBurnt : number = 0;
     ]
     chartOptions = {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales : {
+            yAxes: [{
+               ticks: {
+                  steps : 6,
+                  stepValue : 200,
+                  max : 1200,
+                }
+            }] 
+          }
     }
     labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];      
     chartData = [
