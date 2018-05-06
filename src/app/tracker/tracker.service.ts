@@ -18,7 +18,7 @@ export class WorkoutTrackerService{
     }
   
 
-  fetchWorkoutTrackerDetails(): Observable<ITrackWorkouts[]>{
+  fetchWorkoutTrackerDetails(): Observable<ITrackWorkouts>{
     //var json = JSON.stringify(id);
 
     console.log("<--------- Service call inititated---------------->");

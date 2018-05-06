@@ -1,8 +1,10 @@
+import { IAddWorkout } from '.././create-workout/create-workout';
+
 export interface ITrackWorkouts{
    workoutTimeOfDay : number;
    workoutTimeOfWeek : number;
    workoutTimeOfMonth : number;
-   weeklyCaloriesBurnt : number;
-   monthlyCaloriesBurnt :  number;
-   yearlyCaloriesBurnt :  number;
+   weeklyWorkouts : IAddWorkout[];
+   monthlyWorkouts :  IAddWorkout[];
+   yearlyWorkouts :  IAddWorkout[];
 }

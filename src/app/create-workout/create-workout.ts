@@ -4,4 +4,6 @@ export interface IAddWorkout{
     workoutNote: string;
     caloriesBurnt: string;
     categoryId: string;
+    startDate : string;
+    endDate : string;
 }

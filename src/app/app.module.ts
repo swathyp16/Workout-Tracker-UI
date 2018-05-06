@@ -19,6 +19,7 @@ import { SharedServiceService } from './shared-service.service';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { CategorySearchPipe } from './category-search.pipe';
 import { GoogleChartComponent } from './google-chart/google-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 const appRoutes: Routes = [
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    RouterModule.forChild(appRoutes)
+    RouterModule.forChild(appRoutes),
+    ChartsModule
   ],
   exports: [RouterModule],
   providers: [SharedServiceService],
