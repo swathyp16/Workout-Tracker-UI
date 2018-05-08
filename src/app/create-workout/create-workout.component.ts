@@ -54,14 +54,16 @@ export class CreateWorkoutComponent implements OnInit {
     }
 
 incrementValue(){
-  console.log("calories Burnt : " + this.caloriesBurnt);
-  this.caloriesBurnt = this.caloriesBurnt*1 + this.step*1;
-  console.log("calories Burnt amount : " + this.caloriesBurnt);
+  this.caloriesBurnt = this.convertToFloat((this.caloriesBurnt*1 + this.step*1).toFixed(1));
+    //Number.parseFloat((this.caloriesBurnt*1 + this.step*1).toFixed(1));  
 }
 
 decrementValue(){
-  this.caloriesBurnt = this.caloriesBurnt*1 - this.step*1;
+  this.caloriesBurnt = this.convertToFloat((this.caloriesBurnt*1 - this.step*1).toFixed(1));
 }
 
+convertToFloat(element){
+  return Number.parseFloat(element);
+}
 
 }

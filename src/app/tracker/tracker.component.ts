@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild  } from '@angular/core';
 import {GoogleChartComponent} from '../google-chart/google-chart.component';
 import { ITrackWorkouts } from './tracker';
 import { WorkoutTrackerService } from './tracker.service'
 import { DatePipe } from '@angular/common';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
   selector: 'app-tracker',
@@ -11,33 +12,48 @@ import { DatePipe } from '@angular/common';
   providers: [WorkoutTrackerService,DatePipe]
 })
 export class TrackerComponent implements OnInit {
+@ViewChild(BaseChartDirective)
+public chart: BaseChartDirective;
 trackerData : ITrackWorkouts;
 monthNumber : number;
 dayNumber : number;
 weekNumber : number;
 dayIndex: number;
 weekIndex: number;
-dataVal: number[];
+dataVal: number[] = [1,1,1,1,1,1,1,1,1,1,1,1];
 yearlyCaloriesBurnt : number = 0;
 monthlyCaloriesBurnt : number = 0;
 weeklyCaloriesBurnt : number = 0;
+chartData:Array<any>;
   constructor(private _workoutTrackerService: WorkoutTrackerService,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe) { 
+        this.chartData = [
+            {
+              label: 'Yearly Calories Burnt',
+              data: [1,1,1,1,1,1,1,1,1,1,1,1]
+              //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+              //[21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
+             //data: this.calculateMonthlyCalories()
+            }
+        ];
+    }
 
   ngOnInit() {
     this._workoutTrackerService.fetchWorkoutTrackerDetails()
     .subscribe(data => {
-        debugger
+        //debugger
         this.trackerData = data;
-        //if(this.trackerData[0] != undefined){
             console.log("Tracker data : " + this.trackerData);
-            this.OnClick();          
-//}        
+            this.OnClick(); 
+            // debugger
+            // for (let i = 0; i<this.dataVal.length ; i++) {
+            //     this.chartData[0].data.push(this.dataVal[i]);
+            // }  
     })
   }
 
   
-
+  
     colors = [
         { 
         backgroundColor: 'rgba(30, 169, 224, 0.8)'
@@ -57,15 +73,15 @@ weeklyCaloriesBurnt : number = 0;
           }
     }
     labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];      
-    chartData = [
-        {
-          label: 'Yearly Calories Burnt',
-          data: this.dataVal
-          //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-          //[21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-         //data: this.calculateMonthlyCalories()
-        }
-    ];
+    // chartData = [
+    //     {
+    //       label: 'Yearly Calories Burnt',
+    //       data: this.dataVal
+    //       //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    //       //[21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
+    //      //data: this.calculateMonthlyCalories()
+    //     }
+    // ];
 
     weeklyChartcolor = [
         { 
@@ -112,14 +128,19 @@ weeklyCaloriesBurnt : number = 0;
 
     OnClick(){
         console.log("Months : " + this.trackerData.yearlyWorkouts);
+        //debugger
         for(var i=0; i < this.trackerData.yearlyWorkouts.length; i++){
             this.monthNumber = new Date(this.trackerData.yearlyWorkouts[i].startDate).getMonth();
             console.log("this.monthNumber : " + this.monthNumber);
+            console.log("Parsed calories: " + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt));
             this.chartData[0].data[this.monthNumber] = this.chartData[0].data[this.monthNumber] + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt);
             //console.log("month name  : " + this.chartData[0].data[this.monthNumber] );
+            //debugger
             this.yearlyCaloriesBurnt = this.yearlyCaloriesBurnt + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt);
         }
-        
+        //this.chartData[0].update();
+        this.updateChart();
+        console.log("this.dataVal : " + this.chartData[0].data);
         
         for(var i=0; i < this.trackerData.weeklyWorkouts.length; i++){
             this.dayNumber = new Date(this.trackerData.weeklyWorkouts[i].startDate).getDay();
@@ -140,6 +161,12 @@ weeklyCaloriesBurnt : number = 0;
             //console.log("month name  : " + this.chartData[0].data[this.monthNumber] );
             this.monthlyCaloriesBurnt = this.monthlyCaloriesBurnt + Number.parseInt(this.trackerData.monthlyWorkouts[i].caloriesBurnt);
         }
+    }
+
+    updateChart() {
+        //this.chart.chart.update();// This re-renders the canvas element.
+        this.chartData[0].data.updateChart();
+        
     }
 
  }
