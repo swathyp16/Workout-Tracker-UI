@@ -5,6 +5,7 @@ import { IViewWorkoutCategory } from './view-workout-category';
 import { FormsModule,ReactiveFormsModule,FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { Response } from '@angular/http';
+import { DecimalPipe } from '@angular/common';
 import 'rxjs/add/operator/catch';
 
 @Component({
@@ -20,6 +21,10 @@ export class CreateWorkoutComponent implements OnInit {
  addWorkout: Response;
  successMessage: string = "";
  errorMessage: string = "";
+ caloriesBurnt: number;
+ calories: number;
+ step: number = 0.1;
+ decimalPipe : DecimalPipe;
   constructor(private _addWorkoutService: AddWorkoutService) { }
   
   ngOnInit() {
@@ -47,5 +52,16 @@ export class CreateWorkoutComponent implements OnInit {
           }
         }
     }
+
+incrementValue(){
+  console.log("calories Burnt : " + this.caloriesBurnt);
+  this.caloriesBurnt = this.caloriesBurnt*1 + this.step*1;
+  console.log("calories Burnt amount : " + this.caloriesBurnt);
+}
+
+decrementValue(){
+  this.caloriesBurnt = this.caloriesBurnt*1 - this.step*1;
+}
+
 
 }

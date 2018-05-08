@@ -1,21 +1,29 @@
 body{
     overflow: hidden; 
-    width: 100%;
+    width: 103%;
+    margin-left: -16px;
 }
 .div-position{
     position: relative;
     top: 0px;
     background-image: url(../../assets/images/workout-bg4.jpeg);
     background-repeat: no-repeat;
-    background-size: 1500px;
 }
+.col-md-10{
+    padding-left: 0px !important;
+} 
 
+.increment-decrement-btn{
+    position: relative;
+    top: 22px;
+    height: 29px;
+}
 .row{
     height: 100vh;
 }
 
 .form-container{
-    margin-top: 20px;
+    margin-top: 93px;
     border: 0px solid;
     padding: 50px 60px;
     -webkit-box-shadow: -1px 4px 26px 20px rgba(0,0,0,0.75);

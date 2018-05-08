@@ -1,14 +1,15 @@
 
 body{
     overflow-x: hidden;
-    width: 100%; 
+    width: 103%;
+    margin-left: -16px;
 }
+
 .div-position{
     position: relative;
     top: 0px;
     background-image: url(../../assets/images/workout-bg4.jpeg);
     background-repeat: no-repeat;
-    background-size: 1500px;
 }
 
 .buttons{
@@ -20,7 +21,6 @@ body{
 .header{
     color: white;
     position: relative;
-    /* left: 222px; */
 }
 
 .label{

@@ -1,12 +1,14 @@
 <html>
   <body>
     <div class="div-position container-fluid">
-  <h1 *ngIf="startButtonIdFlag" class="header" align="center">
+  <h1 *ngIf="startButtonIdFlag;else end" class="header" align="center">
       Start Workout
   </h1> 
-  <h1 *ngIf="endButtonIdFlag" class="header" align="center">
-      End Workout
-  </h1> 
+  <ng-template #end>
+      <h1 class="header" align="center">
+          End Workout
+      </h1>
+  </ng-template> 
   <div class="row">
     <div class="col-md-4 col-sm-4 col-xs-12"></div>
     <div class="col-md-4 col-sm-4 col-xs-12">
@@ -18,7 +20,7 @@
         <strong>Error! </strong>{{errorMessage}}
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       </div>
-  <form *ngIf="startButtonIdFlag" #startWorkouts="ngForm" class="editForm form-container" (ngSubmit)="onStartWorkoutFormSubmit()">
+  <form *ngIf="startButtonIdFlag;else endForm" #startWorkouts="ngForm" class="editForm form-container" (ngSubmit)="onStartWorkoutFormSubmit()">
     <div>
       <div  *ngFor = "let data of startParams; let i = index">
       <div class="form-group group">
@@ -45,7 +47,8 @@
 
 </div>
   </form>
-  <form *ngIf="endButtonIdFlag" #endWorkouts="ngForm" class="editForm form-container" (ngSubmit)="onEndWorkoutFormSubmit()">
+  <ng-template #endForm>
+  <form #endWorkouts="ngForm" class="editForm form-container" (ngSubmit)="onEndWorkoutFormSubmit()">
       <div>
         <div  *ngFor = "let data of startParams; let i = index">
         <div class="form-group group">
@@ -72,6 +75,7 @@
   
   </div>
     </form>
+  </ng-template>
 </div>
 </div>
 </div>

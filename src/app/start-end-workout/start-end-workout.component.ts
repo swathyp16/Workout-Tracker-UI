@@ -60,10 +60,12 @@ export class StartEndWorkoutComponent implements OnInit {
       this.startButtonIdFlag = data;
       console.log("start btn value : "+ this.startButtonIdFlag);
    });
-   this._sharedService.endButtonClicked.subscribe(data =>{
-    this.endButtonIdFlag = data;
-    console.log("end btn value : "+ this.endButtonIdFlag);
- });
+//    this._sharedService.endButtonClicked.subscribe(data =>{
+//     //this.endButtonIdFlag = data;
+//     //this.endButtonIdFlag = data;
+//     this.startButtonIdFlag = data;
+//     console.log("end btn value : "+ this.endButtonIdFlag);
+//  });
   }
 
   formatDate(startDt){

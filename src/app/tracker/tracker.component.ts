@@ -17,6 +17,7 @@ dayNumber : number;
 weekNumber : number;
 dayIndex: number;
 weekIndex: number;
+dataVal: number[];
 yearlyCaloriesBurnt : number = 0;
 monthlyCaloriesBurnt : number = 0;
 weeklyCaloriesBurnt : number = 0;
@@ -59,7 +60,7 @@ weeklyCaloriesBurnt : number = 0;
     chartData = [
         {
           label: 'Yearly Calories Burnt',
-          data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59]
+          data: this.dataVal
           //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           //[21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
          //data: this.calculateMonthlyCalories()
