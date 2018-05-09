@@ -22,18 +22,13 @@ export class EditWorkoutService{
   
 
   fetchEditWorkoutDetails(id): Observable<IAddWorkout[]>{
-    //var json = JSON.stringify(id);
-
-    console.log("<--------- Service call inititated---------------->"+ id);
     return this._http.get("http://localhost:8090/editWorkout/"+id, this.options)
     .map((response: Response) =>  response.json())
     .catch(this.handleErrorObservable);
   }
 
   extractData(res: Response) {
-    debugger
     let body = res.json();
-    console.log("edit body: " + JSON.stringify(body));
     return body;
   }
   

@@ -39,18 +39,15 @@ export class StartEndWorkoutComponent implements OnInit {
     this._editWorkoutService.fetchEditWorkoutDetails(id)
     .subscribe(data =>{
     this.fetchedDetails = data;
-      console.log("fetched data is !!!!! : "+ JSON.stringify(this.fetchedDetails));
        this.startParams = <IStartEndWorkout[]>this.fetchedDetails;
        if(this.startButtonIdFlag){
         this.startParams[0].startDate = this.formatDate(Date.now());
         this.startParams[0].startTime = this.formatTime(Date.now());
         this.startParams[0].startWorkoutFlag = true;
-        console.log("new start data is !!!!! : "+ JSON.stringify(this.startParams));
        }else{
         this.startParams[0].endDate = this.formatDate(Date.now());
         this.startParams[0].endTime = this.formatTime(Date.now());
         this.startParams[0].startWorkoutFlag = false;
-        console.log("new end data is !!!!! : "+ JSON.stringify(this.startParams));
        } 
     });
    }
@@ -58,14 +55,7 @@ export class StartEndWorkoutComponent implements OnInit {
   ngOnInit() {
     this._sharedService.startButtonClicked.subscribe(data =>{
       this.startButtonIdFlag = data;
-      console.log("start btn value : "+ this.startButtonIdFlag);
-   });
-//    this._sharedService.endButtonClicked.subscribe(data =>{
-//     //this.endButtonIdFlag = data;
-//     //this.endButtonIdFlag = data;
-//     this.startButtonIdFlag = data;
-//     console.log("end btn value : "+ this.endButtonIdFlag);
-//  });
+    });
   }
 
   formatDate(startDt){
@@ -85,18 +75,14 @@ export class StartEndWorkoutComponent implements OnInit {
         this.successMessage = "Workout Started";
         this.isDisableStartBtn = true;
         this._sharedService.setDisableEndButtonFlag(false);
-       // this.+shared
       }
     },error =>{
       this.errorStatus = error;
       let body = error.json();
-      console.log("Error message: "+ body.error + body.message);
       this.errorMessage = body.message?body.message:"Oops !! Something went wrong";
     });
-    console.log("isDisableStartBtn :  " + this.isDisableStartBtn);
   }
     onEndWorkoutFormSubmit(){
-      console.log("this.startParams : " + this.startParams);
       this._startWorkoutService.startWorkout(this.startParams).subscribe(data => {
         this.startWorkoutStatus = data;
         if(this.startWorkoutStatus.status == 200){
@@ -106,7 +92,6 @@ export class StartEndWorkoutComponent implements OnInit {
       },error =>{
         this.errorStatus = error;
         let body = error.json();
-        console.log("Error message: "+ body.error + body.message);
         this.errorMessage = body.message?body.message:"Oops !! Something went wrong";
       });
   }
@@ -116,12 +101,10 @@ export class StartEndWorkoutComponent implements OnInit {
   }
 
   disableStartBtn(){
-    console.log("this.isDisableStartBtn: " + this.isDisableStartBtn);
     return this.isDisableStartBtn;
   }
 
   disableEndBtn(){
-    console.log("this.isDisableEndBtn: " + this.isDisableEndBtn);
     return this.isDisableEndBtn;
   }
 

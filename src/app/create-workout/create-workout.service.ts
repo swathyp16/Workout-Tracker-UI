@@ -28,7 +28,6 @@ export class AddWorkoutService{
   editWorkout(editArgs): Observable<IAddWorkout[]>{
     var json = JSON.stringify(editArgs[0]);
     var params = json;
-    console.log("<--------- Service call inititated---------------->"+ params);
     return this._http.post("http://localhost:8090/createWorkout/all",params,this.options)
     .map(this.extractData)
     .catch(this.handleErrorObservable);
@@ -37,15 +36,12 @@ export class AddWorkoutService{
   addWorkout(addWorkoutForm: NgForm): Observable<any>{
     var json = JSON.stringify(addWorkoutForm);
     var params = json;
-    console.log("<--------- Service call inititated---------------->"+ params);
     return this._http.post("http://localhost:8090/createWorkout/all",params,this.options)
     .map(this.extractData)
     .catch(this.handleErrorObservable);
   }
 
   viewWorkoutCategory():Observable<IViewWorkoutCategory[]>{
-    console.log("inside viewAllCategory");
-    console.log("<--------- Service call inititated---------------->");
     return this._httpClient.get("http://localhost:8090/viewAllCategory")
     .map(this.extractData)
     .catch(this.handleErrorObservable);
@@ -54,8 +50,6 @@ export class AddWorkoutService{
   extractData(res: Response) {
     let body = res;//.json();
     let responseStr = "";
-    console.log("body: " + body);
-    console.log("json body: " + JSON.stringify(body));
     return body || {};
   }
   handleErrorObservable (error: Response | any) {

@@ -11,7 +11,7 @@ import { WorkoutCategoryService } from './workout-category.service';
   providers: [WorkoutCategoryService]
 })
 export class CategoryComponent implements OnInit {
-  addCategory: Response;//IAddWorkoutCategory[];
+  addCategory: Response;
   viewAllCategory: IAddWorkoutCategory[];
   deleteCategoryStatus : Response;
   isEditBtnClicked:boolean = false;
@@ -29,7 +29,6 @@ export class CategoryComponent implements OnInit {
   }
 
   addWorkoutCategory(addCategoryForm : NgForm):void{
-    console.log("addCategoryForm : " + JSON.stringify(addCategoryForm.value));
     this._workoutCategoryService.addCategory(addCategoryForm)
     .subscribe(data =>{
         this.addCategory = data;
@@ -44,7 +43,6 @@ export class CategoryComponent implements OnInit {
   }
 
   deleteCategory(category,index){
-    console.log("delete category details : " + JSON.stringify(category));
     this._workoutCategoryService.deleteCategory(category)
     .subscribe(data =>{
       this.deleteCategoryStatus = data;
@@ -55,9 +53,7 @@ export class CategoryComponent implements OnInit {
       }
     },error =>{
       this.errorMessage = "Oops !! Something went wrong";
-    });
-    console.log("successMessage : "+ this.successMessage);
-    
+    });    
   }
 
    editCategory(category,index,event,textbox){

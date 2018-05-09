@@ -23,7 +23,6 @@ export class StartWorkoutService{
   startWorkout(startArgs): Observable<any>{
     var json = JSON.stringify(startArgs[0]);
     var params = json;
-    console.log("<--------- Service call inititated---------------->"+ params);
     return this._http.post("http://localhost:8090/startWorkout",params,this.options)
     .map(this.extractData)
     .catch(this.handleErrorObservable);
@@ -32,16 +31,10 @@ export class StartWorkoutService{
   extractData(res: Response) {
     let body = res;//.json();
     let responseStr = "";
-    console.log("body: " + body);
-    console.log("json body: " + JSON.stringify(body));
     return body || {};
   }
   handleErrorObservable (error: HttpErrorResponse | any) {
     console.error(error);
-    // let body = error.json();
-    // console.log("Error message: "+ body.error + body.message);
-    //let errorResp = JSON.stringify(body);//body.error || JSON.stringify(body);
-   // console.log("hdfgsdh: "+ errorResp);
     return Observable.throw(error || error.message);
   } 
 

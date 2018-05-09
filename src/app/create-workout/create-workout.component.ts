@@ -54,8 +54,7 @@ export class CreateWorkoutComponent implements OnInit {
     }
 
 incrementValue(){
-  this.caloriesBurnt = this.convertToFloat((this.caloriesBurnt*1 + this.step*1).toFixed(1));
-    //Number.parseFloat((this.caloriesBurnt*1 + this.step*1).toFixed(1));  
+  this.caloriesBurnt = this.convertToFloat((this.caloriesBurnt*1 + this.step*1).toFixed(1)); 
 }
 
 decrementValue(){

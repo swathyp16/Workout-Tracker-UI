@@ -19,18 +19,13 @@ export class WorkoutTrackerService{
   
 
   fetchWorkoutTrackerDetails(): Observable<ITrackWorkouts>{
-    //var json = JSON.stringify(id);
-
-    console.log("<--------- Service call inititated---------------->");
     return this._http.get("http://localhost:8090/workoutTracker/", this.options)
     .map((response: Response) =>  response.json())
     .catch(this.handleErrorObservable);
   }
 
   extractData(res: Response) {
-    debugger
     let body = res.json();
-    console.log("edit body: " + JSON.stringify(body));
     return body;
   }
   

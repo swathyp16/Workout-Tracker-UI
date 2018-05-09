@@ -28,7 +28,6 @@ export class SharedServiceService {
   }
 
   getDisableEndButtonFlag(){
-    console.log("*************** end btn value : **********" +this.disableEndButton.getValue());
     return this.disableEndButton.getValue();
   }
 

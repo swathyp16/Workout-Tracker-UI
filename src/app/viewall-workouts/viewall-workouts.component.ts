@@ -26,7 +26,6 @@ export class ViewallWorkoutsComponent implements OnInit {
     this._viewallWorkoutService.viewAllWorkout().subscribe(viewAllWorkout => this.viewAllWorkout = viewAllWorkout);
     this._sharedService.disableViewAllEndButton.subscribe(data =>{
       this.disableEndButton = data;
-      console.log("disableEndButton value : "+ this.disableEndButton);
    });
   }
 
@@ -35,7 +34,6 @@ export class ViewallWorkoutsComponent implements OnInit {
     .subscribe(data =>{
       this.deleteWorkoutStatus = data;
       if(this.deleteWorkoutStatus.status == 200){
-        console.log("inside delete workout");
         this.successMessage = "Successfully deleted the Workout item";
         this.viewAllWorkout.splice(index,1);
       }
