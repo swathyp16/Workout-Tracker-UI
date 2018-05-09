@@ -44,14 +44,14 @@
     <!-- </div>  -->
     <!-- height="40vh" width="80vw" -->
     <div style="width: 300px; height: 300px;">
-    <canvas id="year-chart"
-    baseChart
+    <canvas baseChart
     [chartType]="'bar'"
     [datasets]="chartData"
     [labels]="labels"
     [options]="chartOptions"
     [legend]="true"
-    [colors]="colors">
+    [colors]="colors"
+    (chartClick)="chartClicked($event)">
     </canvas>
     </div>
       <p> Year Total Calories Burnt:  {{yearlyCaloriesBurnt}}</p>

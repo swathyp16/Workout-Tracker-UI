@@ -24,35 +24,26 @@ dataVal: number[] = [1,1,1,1,1,1,1,1,1,1,1,1];
 yearlyCaloriesBurnt : number = 0;
 monthlyCaloriesBurnt : number = 0;
 weeklyCaloriesBurnt : number = 0;
-chartData:Array<any>;
-  constructor(private _workoutTrackerService: WorkoutTrackerService,
-    private datePipe: DatePipe) { 
-        this.chartData = [
-            {
-              label: 'Yearly Calories Burnt',
-              data: [1,1,1,1,1,1,1,1,1,1,1,1]
-              //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-              //[21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-             //data: this.calculateMonthlyCalories()
-            }
-        ];
+chartData:Array<any> = [
+    {
+      label: 'Yearly Calories Burnt',
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
+];
+  constructor(private _workoutTrackerService: WorkoutTrackerService,
+    private datePipe: DatePipe) {}
 
   ngOnInit() {
     this._workoutTrackerService.fetchWorkoutTrackerDetails()
     .subscribe(data => {
-        //debugger
         this.trackerData = data;
-            console.log("Tracker data : " + this.trackerData);
-            this.OnClick(); 
-            // debugger
-            // for (let i = 0; i<this.dataVal.length ; i++) {
-            //     this.chartData[0].data.push(this.dataVal[i]);
-            // }  
+        this.renderChart(); 
     })
   }
 
-  
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
   
     colors = [
         { 
@@ -73,15 +64,6 @@ chartData:Array<any>;
           }
     }
     labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];      
-    // chartData = [
-    //     {
-    //       label: 'Yearly Calories Burnt',
-    //       data: this.dataVal
-    //       //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    //       //[21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-    //      //data: this.calculateMonthlyCalories()
-    //     }
-    // ];
 
     weeklyChartcolor = [
         { 
@@ -126,22 +108,16 @@ chartData:Array<any>;
         }
     }
 
-    OnClick(){
-        console.log("Months : " + this.trackerData.yearlyWorkouts);
-        //debugger
+    renderChart(){
         for(var i=0; i < this.trackerData.yearlyWorkouts.length; i++){
             this.monthNumber = new Date(this.trackerData.yearlyWorkouts[i].startDate).getMonth();
             console.log("this.monthNumber : " + this.monthNumber);
             console.log("Parsed calories: " + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt));
-            this.chartData[0].data[this.monthNumber] = this.chartData[0].data[this.monthNumber] + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt);
+            this.dataVal[this.monthNumber] = this.dataVal[this.monthNumber] + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt);
             //console.log("month name  : " + this.chartData[0].data[this.monthNumber] );
             //debugger
             this.yearlyCaloriesBurnt = this.yearlyCaloriesBurnt + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt);
         }
-        //this.chartData[0].update();
-        this.updateChart();
-        console.log("this.dataVal : " + this.chartData[0].data);
-        
         for(var i=0; i < this.trackerData.weeklyWorkouts.length; i++){
             this.dayNumber = new Date(this.trackerData.weeklyWorkouts[i].startDate).getDay();
             console.log("this.dayNumber : " + this.dayNumber);
@@ -151,7 +127,6 @@ chartData:Array<any>;
             //console.log("month name  : " + this.chartData[0].data[this.monthNumber] );
             this.weeklyCaloriesBurnt = this.weeklyCaloriesBurnt + Number.parseInt(this.trackerData.weeklyWorkouts[i].caloriesBurnt);
         }
-        debugger
         for(var i=0; i < this.trackerData.monthlyWorkouts.length; i++){
             this.weekNumber = Number.parseInt(this.datePipe.transform(new Date(this.trackerData.monthlyWorkouts[i].startDate), 'W'));
             console.log("this.weekNumber : " + this.weekNumber);
@@ -161,13 +136,15 @@ chartData:Array<any>;
             //console.log("month name  : " + this.chartData[0].data[this.monthNumber] );
             this.monthlyCaloriesBurnt = this.monthlyCaloriesBurnt + Number.parseInt(this.trackerData.monthlyWorkouts[i].caloriesBurnt);
         }
+        this.chartData = [
+            {
+              label: 'Yearly Calories Burnt',
+              data: this.dataVal 
+            }
+        ];
     }
 
-    updateChart() {
-        //this.chart.chart.update();// This re-renders the canvas element.
-        this.chartData[0].data.updateChart();
-        
-    }
+   
 
  }
 
