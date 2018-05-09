@@ -26,6 +26,14 @@ weekDataVal: number[] = [0, 0, 0, 0, 0, 0, 0];
 yearlyCaloriesBurnt : number = 0;
 monthlyCaloriesBurnt : number = 0;
 weeklyCaloriesBurnt : number = 0;
+workoutDuration : number;
+workoutDurationInWeek : number;
+workoutDurationInMonth : number;
+caloriesBurnt: number;
+caloriesWeekly : number;
+caloriesMonthly : number;
+formattedStartDt: string;
+formattedEndDt: string;
 chartData:Array<any> = [
     {
       label: 'Yearly Calories Burnt',
@@ -65,9 +73,9 @@ weeklyChartData:Array<any> = [
         scales : {
             yAxes: [{
                ticks: {
-                  steps : 6,
+                  //steps : 10,
                   stepValue : 200,
-                  max : 1200,
+                  //max : 2000,
                 }
             }] 
           }
@@ -95,20 +103,26 @@ weeklyChartData:Array<any> = [
     renderChart(){
         for(var i=0; i < this.trackerData.yearlyWorkouts.length; i++){
             this.monthNumber = new Date(this.trackerData.yearlyWorkouts[i].startDate).getMonth();
-            this.dataVal[this.monthNumber] = this.dataVal[this.monthNumber] + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt);
-            this.yearlyCaloriesBurnt = this.yearlyCaloriesBurnt + Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt);
+            this.workoutDuration = this.getWorkoutTimeInMinutes(this.trackerData.yearlyWorkouts[i]);
+            this.caloriesBurnt = this.workoutDuration * Number.parseInt(this.trackerData.yearlyWorkouts[i].caloriesBurnt);
+            this.dataVal[this.monthNumber] = this.dataVal[this.monthNumber] + this.caloriesBurnt;
+            this.yearlyCaloriesBurnt = this.yearlyCaloriesBurnt + this.caloriesBurnt;
         }
         for(var i=0; i < this.trackerData.weeklyWorkouts.length; i++){
             this.dayNumber = new Date(this.trackerData.weeklyWorkouts[i].startDate).getDay();
             this.dayIndex = this.dayNumber-1;
-            this.weekDataVal[this.dayIndex] = this.weekDataVal[this.dayIndex] + Number.parseInt(this.trackerData.weeklyWorkouts[i].caloriesBurnt);
-            this.weeklyCaloriesBurnt = this.weeklyCaloriesBurnt + Number.parseInt(this.trackerData.weeklyWorkouts[i].caloriesBurnt);
+            this.workoutDurationInWeek = this.getWorkoutTimeInMinutes(this.trackerData.weeklyWorkouts[i]);
+            this.caloriesWeekly = this.workoutDurationInWeek * Number.parseInt(this.trackerData.weeklyWorkouts[i].caloriesBurnt);
+            this.weekDataVal[this.dayIndex] = this.weekDataVal[this.dayIndex] + this.caloriesWeekly;
+            this.weeklyCaloriesBurnt = this.weeklyCaloriesBurnt + this.caloriesWeekly;
         }
         for(var i=0; i < this.trackerData.monthlyWorkouts.length; i++){
             this.weekNumber = Number.parseInt(this.datePipe.transform(new Date(this.trackerData.monthlyWorkouts[i].startDate), 'W'));
             this.weekIndex = this.weekNumber-1;
-            this.monthDataVal[this.weekIndex] = this.monthDataVal[this.weekIndex] + Number.parseInt(this.trackerData.monthlyWorkouts[i].caloriesBurnt);
-            this.monthlyCaloriesBurnt = this.monthlyCaloriesBurnt + Number.parseInt(this.trackerData.monthlyWorkouts[i].caloriesBurnt);
+            this.workoutDurationInMonth = this.getWorkoutTimeInMinutes(this.trackerData.monthlyWorkouts[i]);
+            this.caloriesMonthly = this.workoutDurationInMonth * Number.parseInt(this.trackerData.monthlyWorkouts[i].caloriesBurnt);
+            this.monthDataVal[this.weekIndex] = this.monthDataVal[this.weekIndex] + this.caloriesMonthly;
+            this.monthlyCaloriesBurnt = this.monthlyCaloriesBurnt + this.caloriesMonthly;
         }
         this.chartData = [
             {
@@ -130,7 +144,19 @@ weeklyChartData:Array<any> = [
         ];
     }
 
-   
+   getWorkoutTimeInMinutes(element){
+    this.formattedStartDt = this.formatDate(element.startDate);
+    this.formattedEndDt = this.formatDate(element.endDate);
+    var wrkStartTime = Date.parse(this.formattedStartDt+'T'+element.startTime);
+    var wrkEndTime = Date.parse(this.formattedEndDt+'T'+element.endTime);
+    var workoutTimeInMins = Math.ceil((Math.abs(wrkStartTime-wrkEndTime))/(1000*60));
+    return workoutTimeInMins;
+    }
+
+    formatDate(newDate){
+        const formattedDate = this.datePipe.transform(newDate,'yyyy-MM-dd');
+        return formattedDate; 
+      }
 
  }
 

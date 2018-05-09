@@ -6,4 +6,6 @@ export interface IAddWorkout{
     categoryId: string;
     startDate : string;
     endDate : string;
+    startTime: string;
+    endTime: string;
 }

@@ -23,7 +23,6 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this._workoutCategoryService.viewAllCategory()
     .subscribe(data => {
-      debugger
       this.viewAllCategory = data; 
     });
   }
