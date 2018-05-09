@@ -82,20 +82,20 @@ weeklyChartData:Array<any> = [
     }
     colors = [
         { 
-        backgroundColor: 'rgba(30, 169, 224, 0.8)'
+        backgroundColor: 'rgba(224, 189, 34, 0.8)'
         }
     ]
     labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];      
 
     weeklyChartcolor = [
         { 
-        backgroundColor: 'rgba(30, 169, 224, 0.8)'
+        backgroundColor: 'rgba(30, 169, 224 , 0.8)'
         }
     ]
     weeklyChartlabels =  ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];   
     monthlyChartcolor = [
         { 
-        backgroundColor: 'rgba(30, 169, 224, 0.8)'
+        backgroundColor: 'rgba(224, 99, 34, 0.8)'
         }
     ]
     monthlyChartlabels =  ['Week1', 'Week2', 'Week3', 'Week4', 'Week5'];      
@@ -126,19 +126,19 @@ weeklyChartData:Array<any> = [
         }
         this.chartData = [
             {
-              label: 'Yearly Calories Burnt',
+              label: 'Monthly Calories Burnt',
               data: this.dataVal 
             }
         ];
         this.monthlyChartData = [
             {
-              label: 'Montly Calories Burnt',
+              label: 'Weekly Calories Burnt',
               data: this.monthDataVal 
             }
         ];
         this.weeklyChartData = [
             {
-              label: 'Weekly Calories Burnt',
+              label: 'Daily Calories Burnt',
               data: this.weekDataVal 
             }
         ];
