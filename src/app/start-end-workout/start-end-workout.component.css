@@ -21,6 +21,7 @@ body{
 .header{
     color: white;
     position: relative;
+    padding-bottom: 30px;
 }
 
 .label{
