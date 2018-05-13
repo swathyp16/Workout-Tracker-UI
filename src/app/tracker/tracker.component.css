@@ -5,4 +5,15 @@
 
 .header{
     position: relative;
+    font-family: "Montserrat";
+}
+
+.font-color{
+    color:#6963b7;
+}
+
+.font-color-1{
+    color: #d41d1d;
+    margin-left: 32px;
+    font-weight: bold;
 }

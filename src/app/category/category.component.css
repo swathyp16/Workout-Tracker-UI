@@ -18,7 +18,7 @@ body{
 }
 
 .form-container{
-    margin-top: 55px;
+    margin-top: 25px;
     border: 0px solid;
     padding: 50px 60px;
     -webkit-box-shadow: -1px 4px 26px 20px rgba(0,0,0,0.75);
@@ -31,7 +31,7 @@ body{
 .header{
     color: white;
     position: relative;
-    /* left: 222px; */
+    font-family: "Montserrat";
 }
 
 

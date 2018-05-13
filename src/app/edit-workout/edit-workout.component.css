@@ -21,7 +21,7 @@ body{
 .header{
     color: white;
     position: relative;
-    /* left: 222px; */
+    font-family: "Montserrat";
 }
 
 .row{

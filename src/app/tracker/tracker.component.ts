@@ -82,7 +82,7 @@ weeklyChartData:Array<any> = [
     }
     colors = [
         { 
-        backgroundColor: 'rgba(224, 189, 34, 0.8)'
+        backgroundColor: 'rgba(144, 12, 63, 0.8)'
         }
     ]
     labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];      
@@ -95,7 +95,7 @@ weeklyChartData:Array<any> = [
     weeklyChartlabels =  ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];   
     monthlyChartcolor = [
         { 
-        backgroundColor: 'rgba(224, 99, 34, 0.8)'
+        backgroundColor: 'rgba(10, 53, 129, 0.8)'
         }
     ]
     monthlyChartlabels =  ['Week1', 'Week2', 'Week3', 'Week4', 'Week5'];      
