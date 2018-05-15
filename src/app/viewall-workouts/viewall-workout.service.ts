@@ -23,32 +23,22 @@ export class ViewAllWorkoutService{
   
 
   viewAllWorkout(): Observable<IViewAllWorkout[]>{
-    console.log("<--------- Service call inititated---------------->");
     return this._httpClient.get("http://localhost:8090/viewAllWorkout").map(this.extractData).catch(this.handleErrorObservable);
-    //map((response: Response) => <IViewAllWorkout[]> response.json())
+   
   }
   
 
   extractData(res: Response) {
     let body = res;//.json();
-    console.log("inside extractData --> body: " + body);
     return body || {};
   }
   handleErrorObservable (error: Response | any) {
-    console.log("inside handleErrorObservable");
     console.error(error.message || error);
     return Observable.throw(error.message || error);
   } 
 
   deleteWorkout(workoutData):Observable<any>{
     var params = JSON.stringify(workoutData);
-    // var params = json;
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json'
-    //   })
-    // };
-    console.log("<--------- Service call inititated---------------->"+ params);
     return this._http.post("http://localhost:8090/deleteWorkout",params,this.options)
     .map(this.extractData)
     .catch(this.handleErrorObservable);

@@ -30,7 +30,6 @@ export class WorkoutCategoryService{
   }
 
   viewAllCategory():Observable<IAddWorkoutCategory[]>{
-    console.log("inside viewAllCategory");
     return this._httpClient.get("http://localhost:8090/viewAllCategory")
     .map(this.extractData)
     .catch(this.handleErrorObservable);
@@ -39,6 +38,13 @@ export class WorkoutCategoryService{
   deleteCategory(category):Observable<any>{
     var params = JSON.stringify(category);
     return this._http.post("http://localhost:8090/deleteCategory",params,this.options)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+  }
+
+  editCategory(category):Observable<any>{
+    var params = JSON.stringify(category);
+    return this._http.post("http://localhost:8090/createCategory",params,this.options)
     .map(this.extractData)
     .catch(this.handleErrorObservable);
   }

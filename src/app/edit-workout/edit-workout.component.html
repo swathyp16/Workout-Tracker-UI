@@ -28,8 +28,8 @@
     </div>
         <div class="form-group group">
             <label class="form-control-label label">Category </label>
-            <select (change)="onSelect($event)" name="categoryId"  [(ngModel)]="categoryList.categoryId">
-                <option *ngFor="let category of viewCategoryForEdit"  [ngValue]="category.categoryId">
+            <select (change)="onSelect($event)" name="categoryId" [(ngModel)]="editDetails[0].categoryId">
+                <option *ngFor="let category of viewCategoryForEdit" [ngValue]="category.categoryId">
                 {{category.categoryName}}
                 </option>
             </select>

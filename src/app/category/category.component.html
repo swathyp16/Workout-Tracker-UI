@@ -38,7 +38,7 @@
                 </div>
               </td>
               <td class="td-style">
-                <input class="btn btn-info"  type="button" [attr.id]="'editBtn' + i" value="Edit" (click)="editCategory(category,i,$event,textbox)">
+                <input class="btn btn-info"  type="button" [attr.id]="'editBtn' + i" value="Edit" (click)="editCategory(category,$event,i)">
             </td>
             <td class="td-style">
                 <input class="btn btn-danger" type="button" value="Delete" (click)="deleteCategory(category,i)">
@@ -46,8 +46,8 @@
             </tr>
           </table>
     </form>
-          </div>
-      </div>
-</div>
-   </body>
- </html>
+    </div>
+  </div>
+  </div>
+</body>
+</html>

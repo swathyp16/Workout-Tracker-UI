@@ -36,7 +36,7 @@ export class EditWorkoutComponent implements OnInit {
     this._editWorkoutService.fetchEditWorkoutDetails(id)
     .subscribe(data =>{
     this.editDetails = data;
-    });
+  });
   }
 
   ngOnInit() { 

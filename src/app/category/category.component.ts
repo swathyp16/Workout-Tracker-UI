@@ -18,6 +18,7 @@ export class CategoryComponent implements OnInit {
   readOnly : number;
   successMessage: string = "";
   errorMessage: string = "";
+  categoryName: string;
   constructor(private _workoutCategoryService: WorkoutCategoryService) { }
 
   ngOnInit() {
@@ -46,7 +47,6 @@ export class CategoryComponent implements OnInit {
     .subscribe(data =>{
       this.deleteCategoryStatus = data;
       if(this.deleteCategoryStatus.status == 200){
-        console.log("inside delete category");
         this.successMessage = "Successfully deleted the Category";
         this.viewAllCategory.splice(index,1);
       }
@@ -55,7 +55,8 @@ export class CategoryComponent implements OnInit {
     });    
   }
 
-   editCategory(category,index,event,textbox){
+   editCategory(category,event,index){
+    // debugger
      var target = event.target || event.srcElement || event.currentTarget;
      var idValue = target.value;
      if(idValue == "Edit"){
@@ -76,6 +77,22 @@ export class CategoryComponent implements OnInit {
           this.viewAllCategory[i].isEdit = false;
         }
       }
+      for(var i=0; i<target.form.length ; i++){
+        if(target.form[i].id.includes("category-") && index==target.form[i].id.substring(9,10)){
+          this.categoryName = target.form[i].value;
+        }        
+      }
+      category.categoryName = this.categoryName;
+      this._workoutCategoryService.editCategory(category)
+      .subscribe(data =>{
+          this.addCategory = data;
+          if(this.addCategory.status == 200){
+            this.successMessage = "Successfully edited the Category";
+          }
+        },error =>{
+          this.errorMessage = "Oops !! Something went wrong";
+        }
+      );  
     }
    }
  

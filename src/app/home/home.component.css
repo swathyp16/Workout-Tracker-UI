@@ -4,15 +4,13 @@
 }
 
 .container-background{
-	background-image: url(../../assets/images/workout-background-3.jpg);
-    background-repeat: no-repeat;
     position: relative;
     top: 38px;
 
 }
 
-.heading{
-	font-family: cursive;
+.header{
+	font-family: "Montserrat";
     font-weight: bold;
-    margin-left: 364px;
+    position: relative;
 }
